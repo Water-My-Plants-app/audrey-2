@@ -1,0 +1,15 @@
+[build]
+
+command = "npm run build"
+
+publish="./audrey-2/build"
+
+base = "./audrey-2"
+
+[[redirects]]
+
+  from = "/*"
+
+  to = "/index.html"
+
+  status = 200
