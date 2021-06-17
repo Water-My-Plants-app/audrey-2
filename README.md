@@ -1,6 +1,6 @@
-#👀 Product Vision Document
-##This is the template for the Product Vision Document that teams complete 
-after their initial icebreaker. The PVD is crucial to the planning phase and is mandatory for all groups to complete before starting their project.
+
+
+#👀 Product Vision Document ##This is the template for the Product Vision Document that teams complete after their initial icebreaker. The PVD is crucial to the planning phase and is mandatory for all groups to complete before starting their project.
 
 #☝️ Proposal
 
@@ -20,35 +20,25 @@ Our mission statement is to keep our app growing and accessible for users to be 
 
 ##What features are required for your minimum viable product?
 
-user can sign-up / create an account by providing a unique username, a valid mobile phoneNumber and a password.
-user can login to an authenticated session using the credentials provided at account creation / signup.
-Authenticated user can Create, Update and Delete a plant object. At a minimum, each plant must have the following properties:
-```
+user can sign-up / create an account by providing a unique username, a valid mobile phoneNumber and a password. user can login to an authenticated session using the credentials provided at account creation / signup. Authenticated user can Create, Update and Delete a plant object. At a minimum, each plant must have the following properties:
+
 id: Integer
 nickname: String
 species : String
 h2oFrequency: Type determined by implementation
 image: (optional)
-```
-Authenticated user can view a list of created plants. A plant can be 
-deleted or selected to present user with a detail view where user can then update any property of the selected plant.
-Authenticated user can update their phoneNumber and password.
-Authenticated user can update their phoneNumber and password.
+
+Authenticated user can view a list of created plants. A plant can be deleted or selected to present user with a detail view where user can then update any property of the selected plant. Authenticated user can update their phoneNumber and password. Authenticated user can update their phoneNumber and password.
 
 ##What features may you wish to put in a future release?
 
 Authenticated user can set up push notifications to be triggered when an h2oFrequency of any plant arrives / has elapsed.
 
-
 Implement a feature that allows an authenticated user to see an appropriate suggested h2oFrequency based on species using the API of your choice.
-
 
 Authenticated user can upload images of a plant. If no user image is provided, a placeholder image of a plant of the same species populates the view.
 
-
-
-##What do the top 3 similar apps do for their users?
-Florish , Blossom , Planta
+##What do the top 3 similar apps do for their users? Florish , Blossom , Planta
 
 #🛠 Frameworks - Libraries
 
@@ -58,7 +48,7 @@ Axios, react-redux, react-router-dom, body-parser, cors, express, uniqid
 
 ##Do the APIs you need require you to contact them to gain access?
 
-TBA    
+TBA
 
 ##Are you required to pay to use said API(s)?
 
@@ -78,14 +68,9 @@ Plant lovers, poison ivy etc.
 
 ##What feedback have you gotten from potential users?
 
-“Why can’t you water our plants?”,
-“are you playing vieo games?”,
-“what are you talking about?”
+“Why can’t you water our plants?”, “are you playing vieo games?”, “what are you talking about?”
 
-##Have you validated this problem and your solution with a target audience? 
-Describe how.
-
-
+##Have you validated this problem and your solution with a target audience? Describe how.
 
 #🔑 Prototype Key Feature(s)
 
