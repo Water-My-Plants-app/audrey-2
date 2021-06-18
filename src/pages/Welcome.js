@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import image from "../assets/sapling.png";
-import { Heading } from "./StyledComponents";
+import { Heading } from "../styles/StyledComponents";
 
 const WelcomeDiv = styled.div`
   margin: 0 auto;

@@ -9,7 +9,7 @@ import {
   FormDiv,
   Button,
   Error
-} from './StyledComponents'
+} from '../styles/StyledComponents'
 
 const Login = props => {
   const { errors, touched } = props;

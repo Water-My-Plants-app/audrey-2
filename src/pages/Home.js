@@ -5,8 +5,8 @@ import styled from "styled-components";
 import axios from "axios";
 import { Link } from "react-router-dom";
 
-import PlantCard from "./PlantCard";
-import { Heading } from "./StyledComponents";
+import PlantCard from "../components/PlantCard";
+import { Heading } from "../styles/StyledComponents";
 
 const Card = styled.div`
   text-align: center;
@@ -28,7 +28,7 @@ export default function Home() {
   // get plant data from database
   useEffect(() => {
     axios
-      .get(`https://water-my-plant-bw.herokuapp.com/api/plants`)
+      .get(`https://www.dnd5eapi.co/api/monsters`)
       .then(response => {
         setData(response.data);
       })

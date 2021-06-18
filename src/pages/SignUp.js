@@ -10,7 +10,7 @@ import {
   FormDiv,
   Button ,
   Error
-} from './StyledComponents'
+} from '../styles/StyledComponents'
 
 const Label = styled.label`
   margin: 1rem auto;
