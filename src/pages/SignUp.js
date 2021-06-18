@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 
 import { 
@@ -7,51 +7,72 @@ import {
   FormDiv,
   Button ,
   Error
-} from '../styles/StyledComponents'
+} from '../styles/StyledComponents';
+
+const initialFormValues = {
+  fullname: '',
+  username: '',
+  phonenumber: '',
+  password: '',
+  password2: '',
+  termsOfService: false
+}
 
 const Label = styled.label`
   margin: 1rem auto;
 `;
 
 const SignUp = props => {
-  const { errors, touched, values } = props;
+
+  const [values, setValues] = useState(initialFormValues);
+  const [error, /*setError*/] = useState(''); //commented for unused variable warning.
+
+  const handleChange = (event) => {
+    console.log(event.target)
+    setValues({
+      ...values,
+      [event.target.name]: event.target.value
+    })
+    if (event.target.name === 'termsOfService') {
+      setValues({
+        ...values,
+        termsOfService: !values.termsOfService
+      })
+    }
+  }
+
   return (
     <>
       <Heading>Sign Up</Heading>
       <FormDiv>
-        {touched.fullname && errors.fullname && (
-          <Error>{errors.fullname}</Error>
-        )}
-        <Input type="text" name="fullname" placeholder="Name" />
+          {error ? <Error></Error> : undefined}
 
-        {touched.username && errors.username && (
-          <Error>{errors.username}</Error>
-        )}
-        <Input type="text" name="username" placeholder="Username" />
+        <Input type="text" name="fullname" placeholder="Name" onChange={handleChange} value={values.fullname} />
 
-        {touched.phonenumber && errors.phonenumber && (
-          <Error>{errors.phonenumber}</Error>
-        )}
-        <Input type="text" name="phonenumber" placeholder="Phone number" />
+          {error ? <Error></Error> : undefined}
 
-        {touched.password && errors.password && (
-          <Error>{errors.password}</Error>
-        )}
-        <Input type="password" name="password" placeholder="Password" />
+        <Input type="text" name="username" placeholder="Username" onChange={handleChange} value={values.username} />
 
-        {touched.password2 && errors.password2 && (
-          <Error>{errors.password2.slice(49, 69)}</Error>
-        )}
-        <Input type="password" name="password2" placeholder="Confirm password" />
+          {error ? <Error></Error> : undefined}
 
-        {touched.termsOfService && errors.termsOfService && (
-          <Error>{errors.termsOfService.slice(58, 96)}</Error>
-        )}
+        <Input type="text" name="phonenumber" placeholder="Phone number" onChange={handleChange} value={values.phonenumber} />
+
+          {error ? <Error></Error> : undefined}
+        
+        <Input type="password" name="password" placeholder="Password" onChange={handleChange} value={values.password} />
+
+          {error ? <Error></Error> : undefined}
+
+        <Input type="password" name="password2" placeholder="Confirm password" onChange={handleChange} value={values.password2} />
+
+          {error ? <Error></Error> : undefined}
+
         <Label>
           <Input
             type="checkbox"
-            name="TermsOfService"
+            name="termsOfService"
             checked={values.termsOfService}
+            onChange={handleChange}
           />
           <span>Terms of Service</span>
         </Label>
