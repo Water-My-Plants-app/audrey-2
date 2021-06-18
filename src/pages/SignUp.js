@@ -24,46 +24,50 @@ const Label = styled.label`
 
 const SignUp = props => {
 
-  const [values, setValues] = useState(initialFormValues);
+  const [form, setForm] = useState(initialFormValues);
   const [error, /*setError*/] = useState(''); //commented for unused variable warning.
 
   const handleChange = (event) => {
-    console.log(event.target)
-    setValues({
-      ...values,
+    setForm({
+      ...form,
       [event.target.name]: event.target.value
     })
     if (event.target.name === 'termsOfService') {
-      setValues({
-        ...values,
-        termsOfService: !values.termsOfService
+      setForm({
+        ...form,
+        termsOfService: !form.termsOfService
       })
     }
+  };
+
+  const handleSubmit = (event) => {
+    event.preventDefault()
+    console.log("submiting", form)
   }
 
   return (
     <>
       <Heading>Sign Up</Heading>
-      <FormDiv>
+      <FormDiv onSubmit={handleSubmit}>
           {error ? <Error></Error> : undefined}
 
-        <Input type="text" name="fullname" placeholder="Name" onChange={handleChange} value={values.fullname} />
-
-          {error ? <Error></Error> : undefined}
-
-        <Input type="text" name="username" placeholder="Username" onChange={handleChange} value={values.username} />
+        <Input type="text" name="fullname" placeholder="Name" onChange={handleChange} value={form.fullname} />
 
           {error ? <Error></Error> : undefined}
 
-        <Input type="text" name="phonenumber" placeholder="Phone number" onChange={handleChange} value={values.phonenumber} />
+        <Input type="text" name="username" placeholder="Username" onChange={handleChange} value={form.username} />
+
+          {error ? <Error></Error> : undefined}
+
+        <Input type="text" name="phonenumber" placeholder="Phone number" onChange={handleChange} value={form.phonenumber} />
 
           {error ? <Error></Error> : undefined}
         
-        <Input type="password" name="password" placeholder="Password" onChange={handleChange} value={values.password} />
+        <Input type="password" name="password" placeholder="Password" onChange={handleChange} value={form.password} />
 
           {error ? <Error></Error> : undefined}
 
-        <Input type="password" name="password2" placeholder="Confirm password" onChange={handleChange} value={values.password2} />
+        <Input type="password" name="password2" placeholder="Confirm password" onChange={handleChange} value={form.password2} />
 
           {error ? <Error></Error> : undefined}
 
@@ -71,7 +75,7 @@ const SignUp = props => {
           <Input
             type="checkbox"
             name="termsOfService"
-            checked={values.termsOfService}
+            checked={form.termsOfService}
             onChange={handleChange}
           />
           <span>Terms of Service</span>
