@@ -1,7 +1,4 @@
 import React from "react";
-import { withFormik, Field } from "formik";
-import * as yup from "yup";
-import axios from "axios";
 import styled from "styled-components";
 
 import { 
@@ -51,7 +48,7 @@ const SignUp = props => {
           <Error>{errors.termsOfService.slice(58, 96)}</Error>
         )}
         <Label>
-          <Field
+          <Input
             type="checkbox"
             name="TermsOfService"
             checked={values.termsOfService}
@@ -64,64 +61,4 @@ const SignUp = props => {
   );
 };
 
-export default withFormik({
-  mapPropsToValues: values => {
-    return {
-      fullname: values.fullname || "",
-      username: values.username || "",
-      password: values.password || "",
-      password2: values.password2 || "",
-      phonenumber: values.phonenumber || "",
-      termsOfService: values.termsOfService || false
-    };
-  },
-  validationSchema: yup.object().shape({
-    fullname: yup
-      .string()
-      .max(20, "Username must be less than 20 characters")
-      .required(),
-    username: yup
-      .string()
-      .min(5, "Username must be at least 5 characters")
-      .required(),
-    password: yup
-      .string()
-      .min(8, "Password must be at least 8 characters")
-      .required("enter and confirm password"),
-    password2: yup
-      .string()
-      .oneOf([yup.ref("password"), null, "Passwords must match"])
-      .required(),
-    phonenumber: yup
-      .number()
-      .positive()
-      .required(),
-    termsOfService: yup
-      .boolean()
-      .oneOf([true, "You must agree to the terms of service"])
-      .required()
-  }),
-  validateOnChange: false,
-  validateOnBlur: false,
-  handleSubmit: (values, { props, resetForm }) => {
-    let userObj = {
-      fullname: values.fullname,
-      username: values.username,
-      password: values.password,
-      phonenumber: values.phonenumber
-    };
-    axios
-      .post(
-        "https://water-my-plant-bw.herokuapp.com/api/auth/register",
-        userObj
-      )
-      .then(res => {
-        localStorage.setItem("token", res.data.token);
-        resetForm();
-        return props.history.push("/home");
-      })
-      .catch(err => {
-        return err.response;
-      });
-  }
-})(SignUp);
+export default SignUp;
