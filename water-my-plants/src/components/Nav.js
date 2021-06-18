@@ -85,11 +85,11 @@ const ButtonLink = styled(NavLink)`
   text-decoration: none;
   text-transform: uppercase;
   border: none;
-  background-color: #d4d4aa;
+  background-color: #C1FFA6;
   -webkit-transition: all 0.3s ease-in;
   transition: all 0.3s ease-in;
   &:hover {
-    background-color: #000;
+    background-color: #7FBA5C;
     color: #fff;
   }
 `;
@@ -113,11 +113,11 @@ const Button = styled.button`
   text-decoration: none;
   text-transform: uppercase;
   border: none;
-  background-color: #d4d4aa;
+  background-color: #C1FFA6;
   -webkit-transition: all 0.3s ease-in;
   transition: all 0.3s ease-in;
   &:hover {
-    background-color: #000;
+    background-color: #7FBA5C;
     color: #fff;
   }
 `;

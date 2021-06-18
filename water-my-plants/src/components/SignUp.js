@@ -53,7 +53,7 @@ const SignUp = props => {
         <Label>
           <Field
             type="checkbox"
-            name="TermsOfService"
+            name="termsOfService"
             checked={values.termsOfService}
           />
           <span>Terms of Service</span>
