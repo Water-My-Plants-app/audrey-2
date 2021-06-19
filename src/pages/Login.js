@@ -1,7 +1,4 @@
-import React from 'react';
-import { withFormik } from 'formik';
-import * as yup from 'yup';
-import axios from 'axios';
+import React, { useState } from 'react';
 
 import { 
   Input,
@@ -12,21 +9,32 @@ import {
 } from '../styles/StyledComponents'
 
 const Login = props => {
-  const { errors, touched } = props;
+
+  const [form, setForm] = useState({username:'',password:''});
+const [error/*, setError*/] = useState('') //commented for unused variable warning.
+
+  const handleChange = (event) => {
+    event.stopPropagation();
+    setForm({
+      ...form,
+      [event.target.name]: event.target.value
+    })
+  }
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    console.log("submitted", form)
+  }
 
   return (
     <>
       <Heading>Login</Heading>
-      <FormDiv>
-        {touched.username && errors.username && (
-          <Error>{errors.username}</Error>
-        )}
-        <Input type="text" name="Username" placeholder="Username" />
+      <FormDiv onSubmit={handleSubmit}>
+          {error ? <Error>{error}</Error> : undefined}
+        <Input type="text" name="username" placeholder="Username" value={form.username} onChange={handleChange} />
 
-        {touched.password && errors.password && (
-          <Error>{errors.password}</Error>
-        )}
-        <Input type="password" name="Password" placeholder="Password" />
+          {error ? <Error></Error> : undefined}
+        <Input type="password" name="password" placeholder="Password" value={form.password} onChange={handleChange} />
 
         <Button type="submit">Login</Button>
       </FormDiv>
@@ -34,29 +42,4 @@ const Login = props => {
   );
 };
 
-export default withFormik({
-  mapPropsToValues: values => {
-    return {
-      username: values.username || '',
-      password: values.password || ''
-    };
-  },
-  validationSchema: yup.object().shape({
-    username: yup.string().required(),
-    password: yup.string().required()
-  }),
-  validateOnChange: false,
-  validateOnBlur: false,
-  handleSubmit: (values, { props, resetForm }) => {
-    axios
-      .post('https://water-my-plant-bw.herokuapp.com/api/auth/login/', values)
-      .then(res => {
-        localStorage.setItem('token', res.data.token);
-        resetForm();
-        return props.history.push('/home');
-      })
-      .catch(err => {
-        return err.response;
-      });
-  }
-})(Login);
+export default Login;

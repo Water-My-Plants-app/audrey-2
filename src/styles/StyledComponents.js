@@ -1,7 +1,7 @@
-import { Form, Field } from "formik";
+// import { Form, Field } from "formik";
 import styled from "styled-components";
 
-export const FormDiv = styled(Form)`
+export const FormDiv = styled('form')`
   display: flex;
   flex-direction: column;
   width: 70%;
@@ -23,7 +23,7 @@ export const Heading = styled.h1`
   padding-top: 4rem;
 `;
 
-export const Input = styled(Field)`
+export const Input = styled('input')`
   margin: 1rem auto;
   width: 70%;
   height: 2.5rem;

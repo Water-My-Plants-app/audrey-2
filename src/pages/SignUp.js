@@ -1,7 +1,4 @@
-import React from "react";
-import { withFormik, Field } from "formik";
-import * as yup from "yup";
-import axios from "axios";
+import React, { useState } from "react";
 import styled from "styled-components";
 
 import { 
@@ -10,51 +7,76 @@ import {
   FormDiv,
   Button ,
   Error
-} from '../styles/StyledComponents'
+} from '../styles/StyledComponents';
+
+const initialFormValues = {
+  fullname: '',
+  username: '',
+  phonenumber: '',
+  password: '',
+  password2: '',
+  termsOfService: false
+}
 
 const Label = styled.label`
   margin: 1rem auto;
 `;
 
 const SignUp = props => {
-  const { errors, touched, values } = props;
+
+  const [form, setForm] = useState(initialFormValues);
+  const [error, /*setError*/] = useState(''); //commented for unused variable warning.
+
+  const handleChange = (event) => {
+    setForm({
+      ...form,
+      [event.target.name]: event.target.value
+    })
+    if (event.target.name === 'termsOfService') {
+      setForm({
+        ...form,
+        termsOfService: !form.termsOfService
+      })
+    }
+  };
+
+  const handleSubmit = (event) => {
+    event.preventDefault()
+    console.log("submiting", form)
+  }
+
   return (
     <>
       <Heading>Sign Up</Heading>
-      <FormDiv>
-        {touched.fullname && errors.fullname && (
-          <Error>{errors.fullname}</Error>
-        )}
-        <Input type="text" name="fullname" placeholder="Name" />
+      <FormDiv onSubmit={handleSubmit}>
+          {error ? <Error></Error> : undefined}
 
-        {touched.username && errors.username && (
-          <Error>{errors.username}</Error>
-        )}
-        <Input type="text" name="username" placeholder="Username" />
+        <Input type="text" name="fullname" placeholder="Name" onChange={handleChange} value={form.fullname} />
 
-        {touched.phonenumber && errors.phonenumber && (
-          <Error>{errors.phonenumber}</Error>
-        )}
-        <Input type="text" name="phonenumber" placeholder="Phone number" />
+          {error ? <Error></Error> : undefined}
 
-        {touched.password && errors.password && (
-          <Error>{errors.password}</Error>
-        )}
-        <Input type="password" name="password" placeholder="Password" />
+        <Input type="text" name="username" placeholder="Username" onChange={handleChange} value={form.username} />
 
-        {touched.password2 && errors.password2 && (
-          <Error>{errors.password2.slice(49, 69)}</Error>
-        )}
-        <Input type="password" name="password2" placeholder="Confirm password" />
+          {error ? <Error></Error> : undefined}
 
-        {touched.termsOfService && errors.termsOfService && (
-          <Error>{errors.termsOfService.slice(58, 96)}</Error>
-        )}
+        <Input type="text" name="phonenumber" placeholder="Phone number" onChange={handleChange} value={form.phonenumber} />
+
+          {error ? <Error></Error> : undefined}
+        
+        <Input type="password" name="password" placeholder="Password" onChange={handleChange} value={form.password} />
+
+          {error ? <Error></Error> : undefined}
+
+        <Input type="password" name="password2" placeholder="Confirm password" onChange={handleChange} value={form.password2} />
+
+          {error ? <Error></Error> : undefined}
+
         <Label>
-          <Field
+          <Input
             type="checkbox"
-            name="TermsOfService"
-            checked={values.termsOfService}
+            name="termsOfService"
+            checked={form.termsOfService}
+            onChange={handleChange}
           />
           <span>Terms of Service</span>
         </Label>
@@ -64,64 +86,4 @@ const SignUp = props => {
   );
 };
 
-export default withFormik({
-  mapPropsToValues: values => {
-    return {
-      fullname: values.fullname || "",
-      username: values.username || "",
-      password: values.password || "",
-      password2: values.password2 || "",
-      phonenumber: values.phonenumber || "",
-      termsOfService: values.termsOfService || false
-    };
-  },
-  validationSchema: yup.object().shape({
-    fullname: yup
-      .string()
-      .max(20, "Username must be less than 20 characters")
-      .required(),
-    username: yup
-      .string()
-      .min(5, "Username must be at least 5 characters")
-      .required(),
-    password: yup
-      .string()
-      .min(8, "Password must be at least 8 characters")
-      .required("enter and confirm password"),
-    password2: yup
-      .string()
-      .oneOf([yup.ref("password"), null, "Passwords must match"])
-      .required(),
-    phonenumber: yup
-      .number()
-      .positive()
-      .required(),
-    termsOfService: yup
-      .boolean()
-      .oneOf([true, "You must agree to the terms of service"])
-      .required()
-  }),
-  validateOnChange: false,
-  validateOnBlur: false,
-  handleSubmit: (values, { props, resetForm }) => {
-    let userObj = {
-      fullname: values.fullname,
-      username: values.username,
-      password: values.password,
-      phonenumber: values.phonenumber
-    };
-    axios
-      .post(
-        "https://water-my-plant-bw.herokuapp.com/api/auth/register",
-        userObj
-      )
-      .then(res => {
-        localStorage.setItem("token", res.data.token);
-        resetForm();
-        return props.history.push("/home");
-      })
-      .catch(err => {
-        return err.response;
-      });
-  }
-})(SignUp);
+export default SignUp;
