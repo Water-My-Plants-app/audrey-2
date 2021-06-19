@@ -28,9 +28,9 @@ export default function Home() {
   // get plant data from database
   useEffect(() => {
     axios
-      .get(`https://www.dnd5eapi.co/api/monsters`)
+      .get(`https://buildweekplants.herokuapp.com/plants`)
       .then(response => {
-        setData(response.data);
+        console.log(response => response)
       })
       .catch(error => {
         console.log(error);
