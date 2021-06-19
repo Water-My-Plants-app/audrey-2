@@ -80,4 +80,22 @@ Two weeks
 
 ##Do you anticipate working on stretch functionality after completion of a Minimal Viable Product?
 
-Within reason
+
+API calls -
+
+baseURL - https://buildweekplants.herokuapp.com
+
+GET /plants
+GET /users
+GET /plant/:id
+GET /users/:id
+
+POST /login
+POST /users
+POST /plants
+
+PUT /plants/:id
+PUT /users/:id
+
+DELETE /users/:id
+DELETE /plants/:id
