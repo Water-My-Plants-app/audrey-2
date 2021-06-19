@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import axios from 'axios';
 
 import { 
   Input,
@@ -23,12 +24,19 @@ const [error/*, setError*/] = useState('') //commented for unused variable warni
 
   const handleSubmit = (event) => {
     event.preventDefault();
+      axios.post('https://buildweekplants.herokuapp.com/login', form)
+          .then(res => {
+            console.log(res);
+            localStorage.setItem('token', res.data);
+            props.history.push('/home');
+          })
+
     console.log("submitted", form)
   }
 
   return (
     <>
-      <Heading>Login</Heading>
+      <Heading>Login page</Heading>
       <FormDiv onSubmit={handleSubmit}>
           {error ? <Error>{error}</Error> : undefined}
         <Input type="text" name="username" placeholder="Username" value={form.username} onChange={handleChange} />
