@@ -1,5 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
+
+import * as yup from 'yup';
+import schema from '../validation/signUpFormSchema';
 
 import { 
   Input,
@@ -25,19 +28,43 @@ const Label = styled.label`
 const SignUp = props => {
 
   const [form, setForm] = useState(initialFormValues);
-  const [error, /*setError*/] = useState(''); //commented for unused variable warning.
+  const [error, setError] = useState('');
+  const [disabled, setDisabled] = useState(true);
 
-  const handleChange = (event) => {
+  useEffect( () => {
+    schema.isValid(form)
+    .then( valid => {
+      setDisabled(!valid)
+    })
+  },[form])
+
+  const updateForm = (name, value) => {
+    yup
+    .reach(schema, name)
+    .validate(value)
+    .then( res => {
+      setError({
+        ...error,
+        [name]: ''
+      })
+    })
+    .catch( err => {
+      setError({
+        ...error,
+        [name]: err.errors[0]
+      })
+    })
+
     setForm({
       ...form,
-      [event.target.name]: event.target.value
+      [name]: value
     })
-    if (event.target.name === 'termsOfService') {
-      setForm({
-        ...form,
-        termsOfService: !form.termsOfService
-      })
-    }
+  };
+
+  const handleChange = (event) => {
+   const { name, value, type, checked } = event.target;
+   const valueToUse = type === 'checkbox' ? checked : value;
+   updateForm(name, valueToUse);
   };
 
   const handleSubmit = (event) => {
@@ -49,27 +76,27 @@ const SignUp = props => {
     <>
       <Heading>Sign Up</Heading>
       <FormDiv onSubmit={handleSubmit}>
-          {error ? <Error></Error> : undefined}
+          {error.fullname ? <Error>{error.fullname}</Error> : undefined}
 
         <Input type="text" name="fullname" placeholder="Name" onChange={handleChange} value={form.fullname} />
 
-          {error ? <Error></Error> : undefined}
+          {error.username ? <Error>{error.username}</Error> : undefined}
 
         <Input type="text" name="username" placeholder="Username" onChange={handleChange} value={form.username} />
 
-          {error ? <Error></Error> : undefined}
+          {error.phonenumber ? <Error>{error.phonenumber}</Error> : undefined}
 
         <Input type="text" name="phonenumber" placeholder="Phone number" onChange={handleChange} value={form.phonenumber} />
 
-          {error ? <Error></Error> : undefined}
+          {error.password ? <Error>{error.password}</Error> : undefined}
         
         <Input type="password" name="password" placeholder="Password" onChange={handleChange} value={form.password} />
 
-          {error ? <Error></Error> : undefined}
+          {error.password2 ? <Error>{error.password2}</Error> : undefined}
 
         <Input type="password" name="password2" placeholder="Confirm password" onChange={handleChange} value={form.password2} />
 
-          {error ? <Error></Error> : undefined}
+          {error.termsOfService ? <Error>{error.termsOfService}</Error> : undefined}
 
         <Label>
           <Input
@@ -80,7 +107,7 @@ const SignUp = props => {
           />
           <span>Terms of Service</span>
         </Label>
-        <Button type="submit">Sign Up</Button>
+        <Button disabled={disabled} type="submit">Sign Up</Button>
       </FormDiv>
     </>
   );
