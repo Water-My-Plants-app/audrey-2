@@ -130,8 +130,8 @@ export default function Nav() {
       </Heading>
       <NavLinks>
         <MainLink to="/home">My Plants</MainLink>
-        <MainLink to="/plants">Add A Plant</MainLink>
-        <MainLink to="/profile">Profile</MainLink>
+        <MainLink to="/plants">Edit Plants</MainLink>
+        <MainLink to="/profile">Edit Profile</MainLink>
       </NavLinks>
 
       <LoginButtons>

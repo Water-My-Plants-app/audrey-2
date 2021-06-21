@@ -1,11 +1,16 @@
-import React from 'react';
+import React, { useState } from 'react';
 
-const PlantCard = ({title,species,schedule,image}) => {
-    return(
+const PlantCard = (props) => {
+    const [editing, setEditing] = useState(false);
+
+    const {title, id, species, schedule, image} = props;
+    return (
         <div>
-            <h1>{title}</h1>
-            <p>{species}</p>
-            <h4>{schedule}</h4>
+            <div key={id}>
+                <h1>{title}</h1>
+                <p>{species}</p>
+                <h4>{schedule}</h4>
+            </div>
         </div>
     );
 };

@@ -1,8 +1,7 @@
 // list of plants
 import React, {useEffect, useState} from "react";
 import styled from "styled-components";
-import axios from "axios";
-// import { Link } from "react-router-dom";
+import {axiosWithAuth} from "../utilities/axiosCalls";
 import PlantCard from "../components/PlantCard";
 import {Heading} from "../styles/StyledComponents";
 
@@ -26,29 +25,12 @@ const Home = () => {
     const [loading, setLoading] = useState(true);
     // get plant data from database
     useEffect(() => {
-        console.log('home component has loaded')
-        axios.get('https://buildweekplants.herokuapp.com/plants')
+        axiosWithAuth()
+            .get('https://buildweekplants.herokuapp.com/plants')
             .then(response => setPlants(response.data))
             .catch(error => console.log(error));
     }, []);
 
-    const handleDelete = event => {
-        setLoading(true);
-        event.preventDefault();
-        // console.log(event.target.value);
-        axios
-            .delete(
-                `https://buildweekplants.herokuapp.com/${event.target.value}`
-            )
-            .then(response => {
-                // console.log(response.data);
-                setPlants(response);
-                setLoading(false);
-            })
-            .catch(error => {
-                console.log(error);
-            });
-    };
 
     return (
         (plants.length < 0) ?
@@ -68,8 +50,8 @@ const Home = () => {
                             title={plant.nickname}
                             species={plant.species}
                             schedule={plant.h2oFrequency}
+                            id={plant.id}
                             key={plant.id}
-                            handleDelete={handleDelete}
                         />
                     );
                 })}
