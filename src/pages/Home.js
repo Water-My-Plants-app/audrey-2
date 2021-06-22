@@ -22,15 +22,15 @@ const Card = styled.div`
 
 const Home = () => {
     const [plants, setPlants] = useState([]);
-    const [loading, setLoading] = useState(true);
-    // get plant data from database
+    // const [loading, setLoading] = useState(true);
+
+    // get plant data from API
     useEffect(() => {
         axiosWithAuth()
             .get('https://buildweekplants.herokuapp.com/plants')
             .then(response => setPlants(response.data))
             .catch(error => console.log(error));
     }, []);
-
 
     return (
         (plants.length < 0) ?
@@ -44,7 +44,6 @@ const Home = () => {
             <div>
                 <Heading>My Plants</Heading>
                 {plants.map(plant => {
-                    console.log(plant)
                     return (
                         <PlantCard
                             title={plant.nickname}

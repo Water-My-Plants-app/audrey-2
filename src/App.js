@@ -8,7 +8,7 @@ import Login from "./pages/Login";
 import Home from "./pages/Home";
 import UserProfile from "./pages/UserProfile"
 import PrivateRoute from "./components/PrivateRoute";
-import NewPlant from "./pages/NewPlant";
+import EditPlant from "./pages/EditPlant";
 
 const Content = styled.div`
   margin-top: 150px;
@@ -27,7 +27,8 @@ function App() {
                 <Route path="/login" component={Login}/>
                 <PrivateRoute path="/profile" component={UserProfile}/>
                 <PrivateRoute path="/home" component={Home}/>
-                <PrivateRoute path="/plants" component={NewPlant}/>
+                <PrivateRoute path="/plants/:id" component={EditPlant} />
+                <PrivateRoute path="/plants" component={EditPlant} exact/>
             </Content>
         </div>
     );
