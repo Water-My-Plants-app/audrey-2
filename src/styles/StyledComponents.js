@@ -6,7 +6,7 @@ export const FormDiv = styled('form')`
   flex-direction: column;
   width: 70%;
   padding: 2rem 0;
-  margin: 3rem auto;
+  margin: 2rem auto;
   background-color: #C1FFA6;
   color: #000;
   border: 1px solid grey;
@@ -26,7 +26,7 @@ export const Heading = styled.h1`
 export const Input = styled('input')`
   margin: 1rem auto;
   width: 70%;
-  height: 2.5rem;
+  height: 1.5rem;
   border: none;
   padding: 1.25rem;
   font-size: 1.25rem;
