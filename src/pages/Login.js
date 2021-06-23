@@ -60,7 +60,10 @@ const Login = props => {
             .then(res => {
                 console.log(res);
                 localStorage.setItem('token', res.data);
-                window.location.href = "/home";
+                setTimeout(() => {
+                  props.history.push('/home');
+                  window.location.reload();
+                },1000)
             })
 
         console.log("submitted", form)
