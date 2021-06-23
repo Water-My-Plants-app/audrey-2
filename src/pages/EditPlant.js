@@ -13,6 +13,7 @@ const EditPlant = () => {
 
 
     return (
+
         <>
             <form>
                 <h2>Edit {plantInfo.title}</h2>
@@ -25,8 +26,8 @@ const EditPlant = () => {
                     />
                 </label>
             </form>
-
         </>
+
     )
 }
 

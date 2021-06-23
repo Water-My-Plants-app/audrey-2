@@ -27,7 +27,7 @@ function App() {
                 <Route path="/login" component={Login}/>
                 <PrivateRoute path="/profile" component={UserProfile}/>
                 <PrivateRoute path="/home" component={Home}/>
-                <PrivateRoute path="/plants/:id" component={EditPlant} />
+                <PrivateRoute path="/plants/:id" component={EditPlant} exact/>
                 <PrivateRoute path="/plants" component={EditPlant} exact/>
             </Content>
         </div>
