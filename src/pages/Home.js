@@ -1,11 +1,9 @@
 // list of plants
-import React, {useEffect} from "react";
+import React from "react";
 import styled from "styled-components";
 import PlantCard from "../components/PlantCard";
 import {Heading} from "../styles/StyledComponents";
 
-import { connect } from 'react-redux';
-import { getPlants } from '../actions';
 
 const Card = styled.div`
   text-align: center;
@@ -22,17 +20,10 @@ const Card = styled.div`
   }
 `;
 
-const Home = (props) => {
-    // the plants variable holds application state connected to redux store.
-    const { plants, getPlants } = props;
-
-    // // get plant data from API
-    useEffect(() => {
-       getPlants();
-    }, [getPlants]);
+const Home = ({ plants }) => {
 
     return (
-        (!plants.data) ?
+        (!plants) ?
             <div>
                 <Heading>My Plants</Heading>
                 <Card>
@@ -42,7 +33,7 @@ const Home = (props) => {
             :
             <div>
                 <Heading>My Plants</Heading>
-                {plants.data.map(plant => {
+                {plants.map(plant => {
                     return (
                         <PlantCard
                             title={plant.nickname}
@@ -57,10 +48,4 @@ const Home = (props) => {
     );
 }
 
-const mapStateToProps = (state) => {
-    return {
-        plants: state.plants
-    }
-}
-
-export default connect(mapStateToProps,{getPlants}) (Home);
+export default Home;

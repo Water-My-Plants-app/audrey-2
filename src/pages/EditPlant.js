@@ -1,46 +1,43 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 
-import { connect } from 'react-redux';
-import { getPlants } from '../actions';
-
-const EditPlant = (props) => {
-
-    const { plants, getPlants } = props;
-
-    useEffect(() => {
-            getPlants();
-    }, [getPlants]);
-console.log(props)
+const EditPlant = ({ plants }) => {
+    const handleChange = (event) => {
+        console.log("hanlde change.")
+    }
 
     return (
         <>
-           {plants.data ? 
-            plants.data.map( plant => {
-                return (<form>
+           {plants ? 
+            plants.map( plant => {
+                return (<form key={plant.id}>
                 <h2>Edit {plant.nickname}</h2>
                 <label htmlFor="title">Name:</label>
                     <input
                         type="text"
                         name="title"
                         value={plant.nickname}
+                        onChange={handleChange}
                     />
                 <label htmlFor="title">Species:</label>
                     <input
                         type="text"
                         name="title"
                         value={plant.species}
+                        onChange={handleChange}
                     />
                 <label htmlFor="title">Schedule:</label>
                     <input
                         type="text"
                         name="title"
                         value={plant.h2oFrequency}
+                        onChange={handleChange}
                     />
                 <label htmlFor="title">Image:</label>
                     <input
                         type="text"
                         name="title"
                         value={plant.image}
+                        onChange={handleChange}
                     />
             </form>)
             }) : undefined}
@@ -49,10 +46,4 @@ console.log(props)
     )
 }
 
-const mapStateToProps = (state) => {
-    return {
-        plants: state.plants
-    }
-}
-
-export default connect(mapStateToProps, {getPlants}) (EditPlant);
+export default EditPlant;
