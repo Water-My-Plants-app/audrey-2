@@ -1,9 +1,11 @@
 // list of plants
-import React, {useEffect, useState} from "react";
+import React, {useEffect} from "react";
 import styled from "styled-components";
-import {axiosWithAuth} from "../utilities/axiosCalls";
 import PlantCard from "../components/PlantCard";
 import {Heading} from "../styles/StyledComponents";
+
+import { connect } from 'react-redux';
+import { getPlants } from '../actions';
 
 const Card = styled.div`
   text-align: center;
@@ -20,20 +22,17 @@ const Card = styled.div`
   }
 `;
 
-const Home = () => {
-    const [plants, setPlants] = useState([]);
-    // const [loading, setLoading] = useState(true);
+const Home = (props) => {
+    // the plants variable holds application state connected to redux store.
+    const { plants, getPlants } = props;
 
-    // get plant data from API
+    // // get plant data from API
     useEffect(() => {
-        axiosWithAuth()
-            .get('https://buildweekplants.herokuapp.com/plants')
-            .then(response => setPlants(response.data))
-            .catch(error => console.log(error));
-    }, []);
+       getPlants();
+    }, [getPlants]);
 
     return (
-        (plants.length < 0) ?
+        (!plants.data) ?
             <div>
                 <Heading>My Plants</Heading>
                 <Card>
@@ -43,7 +42,7 @@ const Home = () => {
             :
             <div>
                 <Heading>My Plants</Heading>
-                {plants.map(plant => {
+                {plants.data.map(plant => {
                     return (
                         <PlantCard
                             title={plant.nickname}
@@ -57,4 +56,11 @@ const Home = () => {
             </div>
     );
 }
-export default Home;
+
+const mapStateToProps = (state) => {
+    return {
+        plants: state.plants
+    }
+}
+
+export default connect(mapStateToProps,{getPlants}) (Home);

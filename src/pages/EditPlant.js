@@ -1,33 +1,58 @@
-import React, {useEffect, useState} from 'react';
-import {useHistory} from 'react-router-dom';
+import React, {useEffect} from 'react';
 
+import { connect } from 'react-redux';
+import { getPlants } from '../actions';
 
-const EditPlant = () => {
+const EditPlant = (props) => {
 
-    const [ plantInfo, setPlantInfo ] = useState({title:'',image:'',schedule:'',species:'',id:''});
-    const history = useHistory();
+    const { plants, getPlants } = props;
 
     useEffect(() => {
-            setPlantInfo(history.location.state.plant)
-    }, []);
-
+            getPlants();
+    }, [getPlants]);
+console.log(props)
 
     return (
         <>
-            <form>
-                <h2>Edit {plantInfo.title}</h2>
-                <label htmlFor="title">Name:
+           {plants.data ? 
+            plants.data.map( plant => {
+                return (<form>
+                <h2>Edit {plant.nickname}</h2>
+                <label htmlFor="title">Name:</label>
                     <input
                         type="text"
                         name="title"
-                        value={plantInfo.title}
-
+                        value={plant.nickname}
                     />
-                </label>
-            </form>
+                <label htmlFor="title">Species:</label>
+                    <input
+                        type="text"
+                        name="title"
+                        value={plant.species}
+                    />
+                <label htmlFor="title">Schedule:</label>
+                    <input
+                        type="text"
+                        name="title"
+                        value={plant.h2oFrequency}
+                    />
+                <label htmlFor="title">Image:</label>
+                    <input
+                        type="text"
+                        name="title"
+                        value={plant.image}
+                    />
+            </form>)
+            }) : undefined}
 
         </>
     )
 }
 
-export default EditPlant;
+const mapStateToProps = (state) => {
+    return {
+        plants: state.plants
+    }
+}
+
+export default connect(mapStateToProps, {getPlants}) (EditPlant);
