@@ -60,13 +60,9 @@ const Login = props => {
             .then(res => {
                 console.log(res);
                 localStorage.setItem('token', res.data);
-                if (window.location.hostname === "deploy-preview-6--audrey-ii.netlify.app") {
+                setTimeout(() => {
                   window.location.href = "/home";
-                }else if (window.location.hostname === "audrey-ii.netlify.app") {
-                  window.location.href = "/home";
-                }else if ( window.location.hostname === "localhost") {
-                  window.location.href = "/home"
-                }
+                },1000)
 
             })
 
