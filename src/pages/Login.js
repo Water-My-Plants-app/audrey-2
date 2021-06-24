@@ -13,7 +13,7 @@ import {
 } from '../styles/StyledComponents'
 
 const Login = props => {
-
+console.log(props)
   const [form, setForm] = useState({username:'',password:''});
   const [error, setError] = useState('');
   const [disabled, setDisabled] = useState(true);
@@ -60,7 +60,8 @@ const Login = props => {
             .then(res => {
                 console.log(res);
                 localStorage.setItem('token', res.data);
-                props.history.push('/home');
+                props.history.push('/');
+                window.location.reload();
             })
 
         console.log("submitted", form)

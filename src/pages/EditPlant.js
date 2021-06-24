@@ -28,7 +28,6 @@ const EditPlant = (props) => {
                 }
             })
         )
-
     }
 
     const handleSave = (event) => {
@@ -38,7 +37,7 @@ const EditPlant = (props) => {
 
     return (
         <>
-           {plants ?
+           {plants ? 
             plants.map( (plant,i) => {
                 return (
                 <form key={i} onSubmit={handleSave} >

@@ -65,6 +65,7 @@ const LoginButtons = styled.div`
   order: 3;
   max-width: 220px;
   text-align: center;
+  padding: 0 0 1rem 0;
   @media (min-width: 700px) {
     max-width: 150px;
     flex: 1;
@@ -105,7 +106,7 @@ const Button = styled.button`
   font-weight: 700;
   letter-spacing: 0;
   color: #000;
-  margin: 12px 20px;
+  margin: 0;
   padding: 5px;
   border-radius: 0.5rem;
   text-align: center;
@@ -123,6 +124,8 @@ const Button = styled.button`
 `;
 
 export default function Nav() {
+  const token = localStorage.getItem('token');
+
   return (
     <NavBar>
       <Heading exact to="/">
@@ -135,10 +138,10 @@ export default function Nav() {
       </NavLinks>
 
       <LoginButtons>
-        <ButtonLink to="/login">Log In</ButtonLink>
+        {!token ? (<><ButtonLink to="/login">Log In</ButtonLink>
         <Slash>/</Slash>
-        <ButtonLink to="/signup">Sign Up</ButtonLink>
-        <Button
+        <ButtonLink to="/signup">Sign Up</ButtonLink></>) : undefined}
+        {token ? (<Button
           onClick={() => {
             let history = createBrowserHistory({ forceRefresh: true });
             localStorage.removeItem("token");
@@ -151,7 +154,7 @@ export default function Nav() {
           }}
         >
           Log Out
-        </Button>
+        </Button>) : undefined}
       </LoginButtons>
     </NavBar>
   );

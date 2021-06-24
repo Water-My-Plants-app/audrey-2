@@ -12,9 +12,12 @@ const Image = styled.img`
 `;
 
 export default function Welcome() {
+  const token = localStorage.getItem('token');
+  const userName = "Jimmy";
+
   return (
     <WelcomeDiv>
-      <Heading>Welcome</Heading>
+      {token ? (<Heading>{`Welcome ${userName}`}</Heading>) : (<Heading>Welcome</Heading>)}
       <h2>Let's Grow Your Garden</h2>
       <Image src={image} />
     </WelcomeDiv>
