@@ -28,7 +28,6 @@ const EditPlant = (props) => {
                 }
             })
         )
-        
     }
 
     const handleSave = (event) => {
@@ -80,6 +79,7 @@ const EditPlant = (props) => {
 
             <button onClick={handleSave}>save</button>
         </>
+
     )
 }
 

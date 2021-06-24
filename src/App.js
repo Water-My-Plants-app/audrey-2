@@ -37,9 +37,11 @@ function App(props) {
                 <Route path="/signup" component={SignUp}/>
                 <Route path="/login" component={Login}/>
                 <PrivateRoute path="/profile" component={UserProfile}/>
+
                 <PrivateRoute path="/home" component={() => <Home plants={plants.data} />}/>
                 <PrivateRoute path="/plants/:id" component={EditPlant} />
                 <PrivateRoute path="/plants" component={() => <EditPlant plants={plants.data} />} exact/>
+
             </Content>
         </div>
     );
