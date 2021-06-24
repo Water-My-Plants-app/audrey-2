@@ -13,7 +13,7 @@ import {
 } from '../styles/StyledComponents'
 
 const Login = props => {
-
+console.log(props)
   const [form, setForm] = useState({username:'',password:''});
   const [error, setError] = useState('');
   const [disabled, setDisabled] = useState(true);

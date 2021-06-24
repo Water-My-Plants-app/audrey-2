@@ -1,47 +1,84 @@
-import React from 'react';
+import React, { useState } from 'react';
 
-const EditPlant = ({ plants }) => {
+const EditPlant = (props) => {
+    const { plants } = props;
+    const [edit, setEdit] = useState(
+        plants.map( item => {
+            return{
+                id: item.id,
+                nickname: item.nickname,
+                species: item.species,
+                h2oFrequency: item.h2oFrequency,
+                image: item.image
+            }
+        })
+    );
+
     const handleChange = (event) => {
-        console.log("hanlde change.")
+        const name = event.target.name;
+        const value = event.target.value;
+        const id = parseInt(event.target.id);
+
+        setEdit(
+            edit.map( item => {
+                if (item.id === id){
+                    return {...item,[name]: value}
+                }else {
+                    return item
+                }
+            })
+        )
+        
+    }
+
+    const handleSave = (event) => {
+        event.preventDefault();
+        console.log("saved", edit)
     }
 
     return (
         <>
            {plants ? 
-            plants.map( plant => {
-                return (<form key={plant.id}>
+            plants.map( (plant,i) => {
+                return (
+                <form key={i} onSubmit={handleSave} >
                 <h2>Edit {plant.nickname}</h2>
-                <label htmlFor="title">Name:</label>
+                <label htmlFor="nickname">Name:</label>
                     <input
+                        id={plant.id}
                         type="text"
-                        name="title"
-                        value={plant.nickname}
+                        name="nickname"
+                        value={edit[i].nickname}
                         onChange={handleChange}
                     />
-                <label htmlFor="title">Species:</label>
+                <label htmlFor="species">Species:</label>
                     <input
+                        id={plant.id}
                         type="text"
-                        name="title"
-                        value={plant.species}
+                        name="species"
+                        value={edit[i].species}
                         onChange={handleChange}
                     />
-                <label htmlFor="title">Schedule:</label>
+                <label htmlFor="h2oFrequency">Schedule:</label>
                     <input
-                        type="text"
-                        name="title"
-                        value={plant.h2oFrequency}
+                        id={plant.id}
+                        type="text-field"
+                        name="h2oFrequency"
+                        value={edit[i].h2oFrequency}
                         onChange={handleChange}
                     />
-                <label htmlFor="title">Image:</label>
+                <label htmlFor="image">Image:</label>
                     <input
+                        id={plant.id}
                         type="text"
-                        name="title"
-                        value={plant.image}
+                        name="image"
+                        value={edit[i].image}
                         onChange={handleChange}
                     />
             </form>)
             }) : undefined}
 
+            <button onClick={handleSave}>save</button>
         </>
     )
 }
