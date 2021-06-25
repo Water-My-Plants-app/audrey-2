@@ -7,7 +7,7 @@ export const GET_ERROR = "GET_ERROR";
 export const getPlants = ()=> (dispatch)=>{
     dispatch({type: GET_PLANTS})
     axiosWithAuth()
-    .get('https://buildweekplants.herokuapp.com/plants')
+    .get('/api/plants')
     .then(res=>{
         dispatch({
             type: GET_SUCCESS, payload: res.data

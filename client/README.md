@@ -83,7 +83,7 @@ Two weeks
 
 API calls -
 
-baseURL - https://buildweekplants.herokuapp.com
+<!-- baseURL - https://buildweekplants.herokuapp.com
 
 GET /plants
 GET /users
@@ -99,3 +99,17 @@ PUT /users/:id
 
 DELETE /users/:id
 DELETE /plants/:id
+ -->
+
+baseURL - https://backendanew.herokuapp.com
+
+Create - 
+POST '/api/auth/register'
+POST '/api/auth/login'
+POST '/api/plants'
+Read -
+GET '/api/plants'
+Update - 
+PUT '/api/plants/:id'
+Delete -
+DELETE '/api/plants/:id'
