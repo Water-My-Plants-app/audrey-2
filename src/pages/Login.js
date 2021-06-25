@@ -1,62 +1,44 @@
-import React from 'react';
-import { withFormik } from 'formik';
-import * as yup from 'yup';
-import axios from 'axios';
+import React, { useState } from "react";
+import Form from "react-bootstrap/Form";
+import Button from "react-bootstrap/Button";
+import "./Login.css";
 
-import { 
-  Input,
-  Heading,
-  FormDiv,
-  Button,
-  Error
-} from '../styles/StyledComponents'
+export default function Login() {
+  const [email, setusername] = useState("");
+  const [password, setPassword] = useState("");
 
-const Login = props => {
-  const { errors, touched } = props;
+  function validateForm() {
+    return username.length > 0 && password.length > 0;
+  }
+
+  function handleSubmit(event) {
+    event.preventDefault();
+  }
 
   return (
-    <>
-      <Heading>Login</Heading>
-      <FormDiv>
-        {touched.username && errors.username && (
-          <Error>{errors.username}</Error>
-        )}
-        <Input type="text" name="Username" placeholder="Username" />
-
-        {touched.password && errors.password && (
-          <Error>{errors.password}</Error>
-        )}
-        <Input type="password" name="Password" placeholder="Password" />
-
-        <Button type="submit">Login</Button>
-      </FormDiv>
-    </>
+    <div className="Login">
+      <Form onSubmit={handleSubmit}>
+        <Form.Group size="lg" controlId="username">
+          <Form.Label>username</Form.Label>
+          <Form.Control
+            autoFocus
+            type="username"
+            value={username}
+            onChange={(e) => setusername(e.target.value)}
+          />
+        </Form.Group>
+        <Form.Group size="lg" controlId="password">
+          <Form.Label>Password</Form.Label>
+          <Form.Control
+            type="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          />
+        </Form.Group>
+        <Button block size="lg" type="submit" disabled={!validateForm()}>
+          Login
+        </Button>
+      </Form>
+    </div>
   );
-};
-
-export default withFormik({
-  mapPropsToValues: values => {
-    return {
-      username: values.username || '',
-      password: values.password || ''
-    };
-  },
-  validationSchema: yup.object().shape({
-    username: yup.string().required(),
-    password: yup.string().required()
-  }),
-  validateOnChange: false,
-  validateOnBlur: false,
-  handleSubmit: (values, { props, resetForm }) => {
-    axios
-      .post('https://water-my-plant-bw.herokuapp.com/api/auth/login/', values)
-      .then(res => {
-        localStorage.setItem('token', res.data.token);
-        resetForm();
-        return props.history.push('/home');
-      })
-      .catch(err => {
-        return err.response;
-      });
-  }
-})(Login);
+}

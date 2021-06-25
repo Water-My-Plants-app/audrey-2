@@ -9,10 +9,11 @@ import "./Signup.css";
 
 export default function Signup() {
   const [fields, handleFieldChange] = useFormFields({
-    username: "",
-    phoneNumber: "",
+    email: "",     
+    username: "",                     /////////////////////////////////////
     password: "",
     confirmPassword: "",
+    confirmationCode: "",
   });
   const history = useHistory();
   const [newUser, setNewUser] = useState(null);
@@ -21,10 +22,15 @@ export default function Signup() {
 
   function validateForm() {
     return (
-      fields.username.length > 0 &&
+      fields.email.length > 0 &&  
+      fields.username.length > 0 &&           //////////////////////////////
       fields.password.length > 0 &&
       fields.password === fields.confirmPassword
     );
+  }
+
+  function validateConfirmationForm() {
+    return fields.confirmationCode.length > 0;
   }
 
   async function handleSubmit(event) {
@@ -43,25 +49,42 @@ export default function Signup() {
     setIsLoading(true);
   }
 
+  function renderConfirmationForm() {
+    return (
+      <Form onSubmit={handleConfirmationSubmit}>
+        <Form.Group controlId="confirmationCode" size="lg">
+          <Form.Label>Confirmation Code</Form.Label>
+          <Form.Control
+            autoFocus
+            type="tel"
+            onChange={handleFieldChange}
+            value={fields.confirmationCode}
+          />
+          <Form.Text muted>Please check your email for the code.</Form.Text>
+        </Form.Group>
+        <LoaderButton
+          block
+          size="lg"
+          type="submit"
+          variant="success"
+          isLoading={isLoading}
+          disabled={!validateConfirmationForm()}
+        >
+          Verify
+        </LoaderButton>
+      </Form>
+    );
+  }
+
   function renderForm() {
     return (
       <Form onSubmit={handleSubmit}>
         <Form.Group controlId="username" size="lg">
-          <Form.Label>username</Form.Label>
+          <Form.Label>Username</Form.Label>             
           <Form.Control
-            autoFocus
+            autoFocus                        ////////////////////////////////////////
             type="username"
             value={fields.username}
-            onChange={handleFieldChange}
-          />
-        </Form.Group>
-        <Form onSubmit={handleSubmit}>
-        <Form.Group controlId="phoneNumner" size="lg">
-          <Form.Label>phoneNumer</Form.Label>
-          <Form.Control
-            autoFocus
-            type="phoneNumber"
-            value={fields.phoneNumber}
             onChange={handleFieldChange}
           />
         </Form.Group>

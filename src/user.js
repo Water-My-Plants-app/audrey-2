@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import Form from "react-bootstrap/Form";
 import { useHistory } from "react-router-dom";
-import LoaderButton from "../components/LoaderButton";
-import { useAppContext } from "../libs/contextLib";
-import { useFormFields } from "../libs/hooksLib";
+//import LoaderButton from "../components/LoaderButton";
+//import { useAppContext } from "../libs/contextLib";
+//import { useFormFields } from "../libs/hooksLib";
 import { onError } from "../libs/errorLib";
-import "./Signup.css";
+//import "./Signup.css";
 
 export default function Signup() {
   const [fields, handleFieldChange] = useFormFields({
@@ -13,6 +13,7 @@ export default function Signup() {
     phoneNumber: "",
     password: "",
     confirmPassword: "",
+    confirmationCode: "",
   });
   const history = useHistory();
   const [newUser, setNewUser] = useState(null);
@@ -22,9 +23,14 @@ export default function Signup() {
   function validateForm() {
     return (
       fields.username.length > 0 &&
+      fields.phoneNumber.length > 0 &&
       fields.password.length > 0 &&
       fields.password === fields.confirmPassword
     );
+  }
+
+  function validateConfirmationForm() {
+    return fields.confirmationCode.length > 0;
   }
 
   async function handleSubmit(event) {
@@ -43,9 +49,37 @@ export default function Signup() {
     setIsLoading(true);
   }
 
+  function renderConfirmationForm() {
+    return (
+      <Form onSubmit={handleConfirmationSubmit}>
+        <Form.Group controlId="confirmationCode" size="lg">
+          <Form.Label>Confirmation Code</Form.Label>
+          <Form.Control
+            autoFocus
+            type="tel"
+            onChange={handleFieldChange}
+            value={fields.confirmationCode}
+          />
+          <Form.Text muted>Please check your email for the code.</Form.Text>
+        </Form.Group>
+        <LoaderButton
+          block
+          size="lg"
+          type="submit"
+          variant="success"
+          isLoading={isLoading}
+          disabled={!validateConfirmationForm()}
+        >
+          Verify
+        </LoaderButton>
+      </Form>
+    );
+  }
+
   function renderForm() {
     return (
       <Form onSubmit={handleSubmit}>
+
         <Form.Group controlId="username" size="lg">
           <Form.Label>username</Form.Label>
           <Form.Control
@@ -55,9 +89,9 @@ export default function Signup() {
             onChange={handleFieldChange}
           />
         </Form.Group>
-        <Form onSubmit={handleSubmit}>
-        <Form.Group controlId="phoneNumner" size="lg">
-          <Form.Label>phoneNumer</Form.Label>
+
+        <Form.Group controlId="phoneNumber" size="lg">
+          <Form.Label>phoneNumber</Form.Label>
           <Form.Control
             autoFocus
             type="phoneNumber"
@@ -65,6 +99,7 @@ export default function Signup() {
             onChange={handleFieldChange}
           />
         </Form.Group>
+
         <Form.Group controlId="password" size="lg">
           <Form.Label>Password</Form.Label>
           <Form.Control
@@ -73,6 +108,7 @@ export default function Signup() {
             onChange={handleFieldChange}
           />
         </Form.Group>
+
         <Form.Group controlId="confirmPassword" size="lg">
           <Form.Label>Confirm Password</Form.Label>
           <Form.Control
@@ -81,6 +117,7 @@ export default function Signup() {
             value={fields.confirmPassword}
           />
         </Form.Group>
+
         <LoaderButton
           block
           size="lg"
