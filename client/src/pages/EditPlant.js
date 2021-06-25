@@ -2,17 +2,7 @@ import React, { useState } from 'react';
 
 const EditPlant = (props) => {
     const { plants } = props;
-    const [edit, setEdit] = useState(
-        plants.map( item => {
-            return{
-                id: item.id,
-                nickname: item.nickname,
-                species: item.species,
-                h2oFrequency: item.h2oFrequency,
-                image: item.image
-            }
-        })
-    );
+    const [edit, setEdit] = useState([...plants]);
 
     const handleChange = (event) => {
         const name = event.target.name;
