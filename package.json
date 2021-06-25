@@ -19,7 +19,8 @@
     "styled-components": "^5.3.0",
     "uniqid": "^5.3.0",
     "web-vitals": "^1.1.2",
-    "yup": "^0.32.9"
+    "yup": "^0.32.9",
+    "yup-phone": "^1.2.19"
   },
   "scripts": {
     "start": "react-scripts start server",

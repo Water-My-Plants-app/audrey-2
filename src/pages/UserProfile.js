@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from 'react'
 import * as yup from 'yup';
 import styled from 'styled-components';
+import '../App.css';
 import {
     Input,
     Button,
@@ -18,18 +19,18 @@ const initialUserProfileFormValues = {
 }
 
 const initialFormValues = {
-    fullname: '',
-    username: '',
-    phonenumber: '',
-    password: '',
-    password2: '',
+    fullname: 'Jimbo Jimbo',
+    username: 'Jim',
+    phonenumber: '4404175555',
+    password: 'slimjim',
+    password2: 'slimjim',
     termsOfService: false
 }
 
 let initialDisabled = "true";
 
 const initialFormErrors = {
-    phoneNumber: '',
+    phonenumber: '',
     currentPassword: '',
     newPassword: '',
     confirmNewPassword: '',
@@ -58,7 +59,7 @@ const FormSection = styled.div`
   text-align: center;
   width: 70%;
   padding: 1rem 0;
-  margin: 2rem auto;
+  margin: 1rem auto;
   background-color: #C1FFA6;
   color: #000;
   border: 1px solid grey;
@@ -72,11 +73,15 @@ const ErrorDiv = styled.div`
     color: red;
 `;
 
+const ProfileHeading = styled(Heading)`
+  padding-top: 1rem;
+`;
+
 
 // pull in errors or create them here
 export default function UserProfile() {
     const [UserProfileFormValues, setUserProfileFormValues] = useState(initialUserProfileFormValues);
-    const [updatedUserProfileObject, setupdatedUserProfile] = useState({ initialFormValues })
+    const [updatedUserProfileObject, setupdatedUserProfile] = useState(initialFormValues)
     const [disabled, setDisabled] = useState(initialDisabled)
     const [formErrors, setFormErrors] = useState(initialFormErrors) // object
 
@@ -102,23 +107,31 @@ export default function UserProfile() {
         })
     }
 
-    const handleSubmit = e => {
+    const showPWIncorrect = () => {
+        const pwError = document.getElementById("pwError");
+        pwError.classList.toggle("pwError");
+    }
 
+    const handleSubmit = e => {
+        e.preventDefault();
         alert(`Your information has been updated!`)
         //*******//Needs to send information to database//********//
+
         setupdatedUserProfile({
             ...updatedUserProfileObject,
             phonenumber: UserProfileFormValues.phoneNumber,
-            password: UserProfileFormValues.newPassword
+            password: UserProfileFormValues.newPassword,
+            password2: UserProfileFormValues.confirmNewPassword,
         })
         console.log(updatedUserProfileObject);
         setUserProfileFormValues(initialUserProfileFormValues);
 
     }
 
-
     useEffect(() => {
         // ADJUST THE STATUS OF `disabled` EVERY TIME values CHANGE
+
+
         userProfileSchema.isValid(UserProfileFormValues)
             .then(valid => {
                 setDisabled(!valid)
@@ -127,17 +140,17 @@ export default function UserProfile() {
 
 
     return (<div>
-        <Heading>Your Profile</Heading>
+        <ProfileHeading>Your Profile</ProfileHeading>
         <CurrentProfile >
-
+            {console.log(updatedUserProfileObject.fullname, "this is the object state")}
             {/***** pull in current userInfo from database******/}
-            <p>Name: </p>
-            <p>Username:</p>
-            <p>Password:</p>
-            <p>Phone Number:</p>
+            <p>Name: {updatedUserProfileObject.fullname} </p>
+            <p>Username: {updatedUserProfileObject.username}</p>
+            <p>Password: {updatedUserProfileObject.password}</p>
+            <p>Phone Number: {updatedUserProfileObject.phonenumber}</p>
         </CurrentProfile>
         <section>
-            <Heading>Update Your Profile</Heading>
+            <ProfileHeading>Update Your Profile</ProfileHeading>
             <FormSection>
                 <form onSubmit={handleSubmit}>
                     <div>
@@ -153,49 +166,48 @@ export default function UserProfile() {
                                 />
                             </label>
                         </div>
-
-
-                        <div></div>
+                        <ErrorDiv>{formErrors.phoneNumber}</ErrorDiv>
                         <div>
                             <label>
                                 <Input
                                     value={UserProfileFormValues.currentPassword}
                                     onChange={onChange}
                                     name='currentPassword'
-                                    type='text'
+                                    type='password'
                                     placeholder="Current Password"
                                 />
                             </label>
                         </div>
+                        <ErrorDiv>{formErrors.currentPassword}</ErrorDiv>
+                        {/* <ErrorDiv id="pwError" className="pwError">Password is not correct!</ErrorDiv> */}
                         <div>
                             <label>
                                 <Input
                                     value={UserProfileFormValues.newPassword}
                                     onChange={onChange}
                                     name='newPassword'
-                                    type='text'
+                                    type='password'
                                     placeholder="New Password"
                                 />
                             </label>
                         </div>
+                        <ErrorDiv>{formErrors.newPassword}</ErrorDiv>
                         <div>
                             <label>
                                 <Input
                                     value={UserProfileFormValues.confirmNewPassword}
                                     onChange={onChange}
                                     name='confirmNewPassword'
-                                    type='text'
+                                    type='password'
                                     placeholder="Confirm Your Password"
                                 />
                             </label>
 
                         </div>
+                        <ErrorDiv>{formErrors.confirmNewPassword}</ErrorDiv>
                     </div>
                     <Button type="submit" disabled={disabled}>Update</Button>
-                    <ErrorDiv>{formErrors.phoneNumber}</ErrorDiv>
-                    <ErrorDiv>{formErrors.currentPassword}</ErrorDiv>
-                    <ErrorDiv>{formErrors.newPassword}</ErrorDiv>
-                    <ErrorDiv>{formErrors.confirmNewPassword}</ErrorDiv>
+
                 </form>
             </FormSection>
         </section>

@@ -1,19 +1,26 @@
 // Here goes the schema for the form
 import * as yup from 'yup';
 
+
+
 const userProfileSchema = yup.object().shape({
-    phoneNumber: yup
-        .string()
-        .required("You must update your phone number in order to submit")
-        .min(7, "PhoneNumber must be at least 7 characters"),
+    phoneNumber: yup.number()
+        .typeError("That doesn't look like a phone number")
+        .positive("A phone number can't start with a minus")
+        .integer("A phone number can't include a decimal point")
+        .min(8,)
+        .required('A phone number is required'),
     currentPassword: yup
         .string()
         .required("What is your current password"),
     newPassword: yup
         .string()
+        .min(4)
+        .max(14)
         .required("You must supply a new password"),
     confirmNewPassword: yup
         .string()
+        .oneOf([yup.ref("newPassword")], null)
         .required("You Must confirm your password"),
 })
 
