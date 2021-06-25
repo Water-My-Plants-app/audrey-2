@@ -12,7 +12,6 @@ import {
 } from '../styles/StyledComponents'
 
 const Login = props => {
-console.log(props)
   const [form, setForm] = useState({username:'',password:''});
   const [error, setError] = useState('');
   const [disabled, setDisabled] = useState(true);
@@ -55,7 +54,7 @@ console.log(props)
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        axios.post('https://buildweekplants.herokuapp.com/login', form)
+        axios.post('https://backendanew.herokuapp.com/api/auth/login', form)
             .then(res => {
                 console.log(res);
                 localStorage.setItem('token', res.data);
