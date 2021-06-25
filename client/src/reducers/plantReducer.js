@@ -1,8 +1,9 @@
-import { GET_PLANTS, GET_SUCCESS } from '../actions';
+import { GET_PLANTS, GET_SUCCESS, GET_ERROR } from '../actions';
 
 const initialData = {
     data: [],
-    isFetching: false
+    isFetching: false,
+    error: ''
 };
 
 const reducer = ( state=initialData, action ) => {
@@ -19,6 +20,12 @@ const reducer = ( state=initialData, action ) => {
                 ...state,
                 isFetching: false,
                 data: [...action.payload]
+            });
+        case GET_ERROR:
+            return({
+                ...state,
+                isFetching: false,
+                error: action.payload 
             })
         default:
             return state;
