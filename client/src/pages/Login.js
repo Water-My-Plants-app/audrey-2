@@ -57,13 +57,14 @@ const Login = props => {
         axios.post('https://backendanew.herokuapp.com/api/auth/login', form)
             .then(res => {
                 console.log(res);
-                localStorage.setItem('token', res.data);
+                localStorage.setItem('token', res.data.token);
                 props.history.push('/');
                 window.location.reload();
             })
 
-        console.log("submitted", form)
-    }
+        localStorage.setItem('userName', `${form.username}`); 
+        console.log("submitted", form);
+    };
 
   return (
     <>

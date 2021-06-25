@@ -13,7 +13,7 @@ const Image = styled.img`
 
 export default function Welcome() {
   const token = localStorage.getItem('token');
-  const userName = "Jimmy";
+  const userName = localStorage.getItem('userName');
 
   return (
     <WelcomeDiv>
