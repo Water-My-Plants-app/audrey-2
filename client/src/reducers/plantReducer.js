@@ -26,7 +26,7 @@ const reducer = ( state=initialData, action ) => {
                 ...state,
                 isFetching: false,
                 error: action.payload 
-            })
+            });
         default:
             return state;
     }
