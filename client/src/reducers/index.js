@@ -1,7 +1,9 @@
   
 import { combineReducers } from 'redux';
-import plantReducer from './plantReducer'
+import plantReducer from './plantReducer';
+import userReducer from './userReducer';
 
 export default combineReducers({
-    plants: plantReducer
+    plants: plantReducer,
+    user: userReducer
 });
