@@ -11,10 +11,12 @@ export const POST_SUCCESS = "POST_SUCCESS";
 export const POST_ERROR = "POST_ERROR";
 
 export const PUT_PLANT = "PUT_PLANT";
+export const PUT_USER = "PUT_USER";
 export const PUT_ERROR = "PUT_ERROR";
 export const PUT_SUCCESS = "PUT_SUCCESS";
 
 export const DELETE_PLANT = "DELETE_PLANT";
+export const DELETE_USER = "DELETE_USER";
 export const DELETE_ERROR = "DELETE_ERROR";
 export const DELETE_SUCCESS = "DELETE_SUCCESS";
 
