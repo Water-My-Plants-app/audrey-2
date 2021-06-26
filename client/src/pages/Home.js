@@ -1,9 +1,9 @@
 // list of plants
-import React, {useEffect, useState} from "react";
+import React from "react";
 import styled from "styled-components";
-import {axiosWithAuth} from "../utilities/axiosCalls";
 import PlantCard from "../components/PlantCard";
 import {Heading} from "../styles/StyledComponents";
+
 
 const Card = styled.div`
   text-align: center;
@@ -20,20 +20,10 @@ const Card = styled.div`
   }
 `;
 
-const Home = () => {
-    const [plants, setPlants] = useState([]);
-    // const [loading, setLoading] = useState(true);
-
-    // get plant data from API
-    useEffect(() => {
-        axiosWithAuth()
-            .get('https://buildweekplants.herokuapp.com/plants')
-            .then(response => setPlants(response.data))
-            .catch(error => console.log(error));
-    }, []);
+const Home = ({ plants }) => {
 
     return (
-        (plants.length < 0) ?
+        (!plants) ?
             <div>
                 <Heading>My Plants</Heading>
                 <Card>
@@ -57,4 +47,5 @@ const Home = () => {
             </div>
     );
 }
+
 export default Home;

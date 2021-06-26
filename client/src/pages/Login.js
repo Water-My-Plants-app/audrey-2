@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-
 import * as yup from 'yup';
 import schema from '../validation/loginFormSchema';
 
@@ -13,7 +12,6 @@ import {
 } from '../styles/StyledComponents'
 
 const Login = props => {
-
   const [form, setForm] = useState({username:'',password:''});
   const [error, setError] = useState('');
   const [disabled, setDisabled] = useState(true);
@@ -56,11 +54,12 @@ const Login = props => {
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        axios.post('https://buildweekplants.herokuapp.com/login', form)
+        axios.post('https://backendanew.herokuapp.com/api/auth/login', form)
             .then(res => {
                 console.log(res);
                 localStorage.setItem('token', res.data);
-                props.history.push('/home');
+                props.history.push('/');
+                window.location.reload();
             })
 
         console.log("submitted", form)
