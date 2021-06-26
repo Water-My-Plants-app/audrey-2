@@ -11,12 +11,10 @@ export const POST_SUCCESS = "POST_SUCCESS";
 export const POST_ERROR = "POST_ERROR";
 
 export const PUT_PLANT = "PUT_PLANT";
-export const PUT_USER = "PUT_USER";
 export const PUT_ERROR = "PUT_ERROR";
 export const PUT_SUCCESS = "PUT_SUCCESS";
 
 export const DELETE_PLANT = "DELETE_PLANT";
-export const DELETE_USER = "DELETE_USER";
 export const DELETE_ERROR = "DELETE_ERROR";
 export const DELETE_SUCCESS = "DELETE_SUCCESS";
 
@@ -34,4 +32,20 @@ export const getPlants = ()=> (dispatch)=>{
             type: GET_ERROR, payload: JSON.stringify(err)
         })
     })
+}
+
+export const postRegister = ()=> (dispatch)=>{
+    dispatch({type: POST_REGISTER})
+    axiosWithAuth()
+        .get('/api/auth/register')
+        .then(res=>{
+            dispatch({
+                type: POST_SUCCESS, payload: res.data
+            });
+        })
+        .catch(err=>{
+            dispatch({
+                type: POST_ERROR, payload: JSON.stringify(err)
+            })
+        })
 }
