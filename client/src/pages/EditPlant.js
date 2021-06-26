@@ -72,37 +72,41 @@ const EditPlant = (props) => {
                     return (
                         <FormSection key={i} onSubmit={handleSave} >
                             <Heading>Edit {plant.nickname}</Heading>
-                            <label htmlFor="nickname">Name:</label>
+                            <label htmlFor="nickname"></label>
                             <Input
                                 id={plant.id}
                                 type="text"
                                 name="nickname"
                                 value={edit[i].nickname}
                                 onChange={handleChange}
+                                placeholder="Nickname"
                             />
-                            <label htmlFor="species">Species:</label>
+                            <label htmlFor="species"></label>
                             <Input
                                 id={plant.id}
                                 type="text"
                                 name="species"
                                 value={edit[i].species}
                                 onChange={handleChange}
+                                placeholder="Species"
                             />
-                            <label htmlFor="h2oFrequency">Schedule:</label>
+                            <label htmlFor="h2oFrequency"></label>
                             <Input
                                 id={plant.id}
                                 type="text-field"
                                 name="h2oFrequency"
                                 value={edit[i].h2oFrequency}
                                 onChange={handleChange}
+                                placeholder="Schedule"
                             />
-                            <label htmlFor="image">Image:</label>
+                            <label htmlFor="image"></label>
                             <Input
                                 id={plant.id}
                                 type="text"
                                 name="image"
                                 value={edit[i].image}
                                 onChange={handleChange}
+                                placeholder="Image"
                             />
                         </FormSection>)
                 }) : undefined}
