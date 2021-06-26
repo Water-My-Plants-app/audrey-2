@@ -24,7 +24,7 @@ export const getPlants = ()=> (dispatch)=>{
 export const getUser = ()=> (dispatch)=>{
     dispatch({type: GET_USER})
     axiosWithAuth()
-    .get('/api/user/:id')
+    .get('/api/users/:id')
     .then(res=>{
         dispatch({
             type: GET_SUCCESS, payload: res.data
