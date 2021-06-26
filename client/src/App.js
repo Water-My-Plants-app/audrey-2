@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import {Route} from "react-router-dom";
 import styled from "styled-components";
 import Nav from './components/Nav'
@@ -10,7 +10,6 @@ import AddPlant from "./pages/AddPlant"
 import UserProfile from "./pages/UserProfile"
 import PrivateRoute from "./components/PrivateRoute";
 import EditPlant from "./pages/EditPlant";
-
 import { connect } from 'react-redux';
 import { getPlants } from './actions';
 
