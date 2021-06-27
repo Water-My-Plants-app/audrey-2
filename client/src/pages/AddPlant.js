@@ -30,6 +30,7 @@ const initialFormErrors = {
     nickName: '',
     species: '',
     h2oFrequency: '',
+    image: '',
 }
 
 const FormSection = styled.div`
@@ -130,6 +131,15 @@ export default function UserProfile() {
                     </div>
                     <div>
 
+                        <label>
+                            <Input
+                                value={addPlantFormValues.h2oFrequency}
+                                onChange={onChange}
+                                name='h2oFrequency'
+                                type='text'
+                                placeholder="Water How Often?"
+                            />
+                        </label>
                         <label>
                             <Input
                                 value={addPlantFormValues.h2oFrequency}
