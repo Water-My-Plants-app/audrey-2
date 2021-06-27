@@ -25,7 +25,6 @@ const initialPlantValues = {
 }
 
 const initialFormErrors = {
-    id: '',
     nickname: '',
     species: '',
     h2o_frequency: '',
@@ -146,6 +145,15 @@ export default function UserProfile() {
                                 value={addPlantFormValues.h2o_frequency}
                                 onChange={onChange}
                                 name='h2o_frequency'
+                                type='text'
+                                placeholder="Water How Often?"
+                            />
+                        </label>
+                        <label>
+                            <Input
+                                value={addPlantFormValues.h2oFrequency}
+                                onChange={onChange}
+                                name='h2oFrequency'
                                 type='text'
                                 placeholder="Water How Often?"
                             />

@@ -1,5 +1,8 @@
 import React, { useState, useEffect } from "react";
+import axios from "axios";
 import styled from "styled-components";
+import SignUpSuccessful from "./SignUpSuccessful";
+import { useHistory } from "react-router-dom";
 
 import * as yup from 'yup';
 import schema from '../validation/signUpFormSchema';
@@ -28,8 +31,10 @@ const Label = styled.label`
 const SignUp = props => {
 
   const [form, setForm] = useState(initialFormValues);
+  const [success, setSuccess] = useState(false)
   const [error, setError] = useState('');
   const [disabled, setDisabled] = useState(true);
+  const { push } = useHistory();
 
   useEffect( () => {
     schema.isValid(form)
@@ -68,13 +73,26 @@ const SignUp = props => {
   };
 
   const handleSubmit = (event) => {
-    event.preventDefault()
+    event.preventDefault();
+    axios.post('https://backendanew.herokuapp.com/api/auth/register', {
+        username: form.username,
+        password: form.password,
+    })
+    .then( res => {
+      setSuccess(!success)
+      setTimeout(() => {
+        push("/login")
+      },2000)
+    })
+    .catch(err => {
+      console.log(err)
+    })
     console.log("submiting", form)
   }
 
   return (
     <>
-      <Heading>Sign Up</Heading>
+      {success === false ? (<><Heading>Sign Up</Heading>
       <FormDiv onSubmit={handleSubmit}>
           {error.fullname ? <Error>{error.fullname}</Error> : undefined}
 
@@ -108,7 +126,7 @@ const SignUp = props => {
           <span>Terms of Service</span>
         </Label>
         <Button disabled={disabled} type="submit">Sign Up</Button>
-      </FormDiv>
+      </FormDiv></>) : <><SignUpSuccessful/></>}
     </>
   );
 };

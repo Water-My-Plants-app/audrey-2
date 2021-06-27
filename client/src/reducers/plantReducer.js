@@ -1,7 +1,9 @@
 import { GET_PLANTS, GET_SUCCESS, GET_ERROR } from '../actions';
 
 const initialData = {
-    data: [],
+    data: [
+
+    ],
     isFetching: false,
     error: ''
 };
