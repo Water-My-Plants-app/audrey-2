@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import image from "../assets/sapling.png";
 import { Heading } from "../styles/StyledComponents";
+import { connect } from 'react-redux';
 
 const WelcomeDiv = styled.div`
   margin: 0 auto;
@@ -11,9 +12,9 @@ const Image = styled.img`
   max-width: 90%;
 `;
 
-export default function Welcome() {
+const Welcome =(props)=> {
   const token = localStorage.getItem('token');
-  const userName = "Jimmy";
+  const userName = {props.username};
 
   return (
     <WelcomeDiv>
@@ -23,3 +24,8 @@ export default function Welcome() {
     </WelcomeDiv>
   );
 }
+
+const mapStateToProps = state => ({
+    username: state.user.username,
+})
+export default connect(mapStateToProps,dispatch)(Welcome)
