@@ -1,8 +1,11 @@
 import React, { useState } from 'react';
+import { useHistory } from 'react-router-dom';
 
 const EditPlant = (props) => {
     const { plants } = props;
     const [edit, setEdit] = useState([...plants]);
+
+    const { push } = useHistory();
 
     const handleChange = (event) => {
         const name = event.target.name;
@@ -68,6 +71,7 @@ const EditPlant = (props) => {
             }) : undefined}
 
             <button onClick={handleSave}>save</button>
+            <button onClick={()=> push("/addplant") }>add plant</button>
         </>
 
     )

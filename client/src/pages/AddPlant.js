@@ -2,10 +2,11 @@
 // id: Integer
 // nickname: String
 // species : String
-// h2oFrequency: Type determined by implementation
+// h2o_frequency: Type determined by implementation
 // image: (optional)
 
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect } from 'react';
+import { axiosWithAuth } from '../utilities/axiosCalls';
 import * as yup from 'yup';
 import styled from 'styled-components';
 import {
@@ -17,19 +18,17 @@ import {
 import addPlantSchema from '../validation/addPlantSchema';
 
 const initialPlantValues = {
-    id: '',
-    nickName: '',
+    // id: '',
+    nickname: '',
     species: '',
-    h2oFrequency: '',
+    h2o_frequency: '',
 }
-
-let initialDisabled = "true";
 
 const initialFormErrors = {
     id: '',
-    nickName: '',
+    nickname: '',
     species: '',
-    h2oFrequency: '',
+    h2o_frequency: '',
 }
 
 const FormSection = styled.div`
@@ -48,15 +47,15 @@ const FormSection = styled.div`
   box-shadow:0 1rem 1rem grey;
 `;
 
-const ErrorDiv = styled.div`
-    color: red;
-`;
+// const ErrorDiv = styled.div`
+//     color: red;
+// `;
 
 
 // pull in errors or create them here
 export default function UserProfile() {
     const [addPlantFormValues, setaddPlantFormValues] = useState(initialPlantValues);
-    const [disabled, setDisabled] = useState(initialDisabled)
+    const [disabled, setDisabled] = useState(true)
     const [formErrors, setFormErrors] = useState(initialFormErrors) // object
 
     // onchange -- set values
@@ -85,6 +84,18 @@ export default function UserProfile() {
         e.preventDefault();
         alert(`You have added a new Plant!`)
         //*******//Needs to send information to database//********//
+        axiosWithAuth()
+        .post('/api/plants', {
+            h2o_frequency: addPlantFormValues.h2o_frequency,
+            nickname: addPlantFormValues.nickname,
+            species: addPlantFormValues.species,
+        })
+        .then(res => {
+            console.log(res)
+        })
+        .catch(err => {
+            console.log(err)
+        })
 
         console.log(addPlantFormValues);
 
@@ -109,9 +120,9 @@ export default function UserProfile() {
                     <div>
                         <label>
                             <Input
-                                value={addPlantFormValues.nickName}
+                                value={addPlantFormValues.nickname}
                                 onChange={onChange}
-                                name='nickName'
+                                name='nickname'
                                 type='text'
                                 placeholder="Nick Name"
                             />
@@ -132,19 +143,16 @@ export default function UserProfile() {
 
                         <label>
                             <Input
-                                value={addPlantFormValues.h2oFrequency}
+                                value={addPlantFormValues.h2o_frequency}
                                 onChange={onChange}
-                                name='h2oFrequency'
+                                name='h2o_frequency'
                                 type='text'
                                 placeholder="Water How Often?"
                             />
                         </label>
                     </div>
                     <Button type="submit" disabled={disabled}>Update</Button>
-                    <ErrorDiv>{formErrors.phoneNumber}</ErrorDiv>
-                    <ErrorDiv>{formErrors.currentPassword}</ErrorDiv>
-                    <ErrorDiv>{formErrors.newPassword}</ErrorDiv>
-                    <ErrorDiv>{formErrors.confirmNewPassword}</ErrorDiv>
+
                 </form>
             </FormSection>
         </section>

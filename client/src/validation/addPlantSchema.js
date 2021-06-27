@@ -1,13 +1,13 @@
 import * as yup from 'yup';
 
 const addPlantSchema = yup.object().shape({
-    nickName: yup
+    nickname: yup
         .string()
         .required('What is the name for your plant?'),
     species: yup
         .string()
         .required("What is the plant species"),
-    h2oFrequency: yup
+    h2o_frequency: yup
         .string()
         .required("How often does this plant need watered?")
 })
