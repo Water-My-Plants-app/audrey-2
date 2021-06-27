@@ -1,5 +1,6 @@
 // Authenticated user can update their phoneNumber and password.
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect } from 'react';
+import { axiosWithAuth } from '../utilities/axiosCalls';
 import * as yup from 'yup';
 import styled from 'styled-components';
 import '../App.css';
@@ -12,28 +13,29 @@ import {
 import userProfileSchema from '../validation/userProfileSchema';
 
 const initialUserProfileFormValues = {
-    phoneNumber: '',
-    currentPassword: '',
-    newPassword: '',
-    confirmNewPassword: '',
+    username: '',
+    // phoneNumber: '',
+    // currentPassword: '',
+    // newPassword: '',
+    // confirmNewPassword: '',
 }
 
 const initialFormValues = {
-    fullname: 'Jimbo Jimbo',
+    // fullname: 'Jimbo Jimbo',
     username: 'Jim',
-    phonenumber: '4404175555',
-    password: 'slimjim',
-    password2: 'slimjim',
-    termsOfService: false
+    // phonenumber: '4404175555',
+    // password: 'slimjim',
+    // password2: 'slimjim',
+    // termsOfService: false
 }
 
-let initialDisabled = "true";
-
 const initialFormErrors = {
-    phonenumber: '',
-    currentPassword: '',
-    newPassword: '',
-    confirmNewPassword: '',
+    id: '',
+    username: '',
+    // phonenumber: '',
+    // currentPassword: '',
+    // newPassword: '',
+    // confirmNewPassword: '',
 }
 
 const CurrentProfile = styled.div`
@@ -82,9 +84,25 @@ const ProfileHeading = styled(Heading)`
 export default function UserProfile() {
     const [UserProfileFormValues, setUserProfileFormValues] = useState(initialUserProfileFormValues);
     const [updatedUserProfileObject, setupdatedUserProfile] = useState(initialFormValues)
-    const [disabled, setDisabled] = useState(initialDisabled)
+    const [disabled, setDisabled] = useState(true)
     const [formErrors, setFormErrors] = useState(initialFormErrors) // object
 
+    useEffect(() => {
+        axiosWithAuth()
+        .get('/api/users')
+        .then(res => {
+            const userObj = res.data.filter( item => item.username === localStorage.getItem('userName'))
+            setupdatedUserProfile({
+                ...updatedUserProfileObject,
+                'username': userObj[0].username,
+                'id': userObj[0].id,
+            })
+        })
+        .catch(err => {
+            console.log(err)
+        })
+
+    },[])
     // onchange -- set values
     const onChange = e => {
 
@@ -107,22 +125,25 @@ export default function UserProfile() {
         })
     }
 
-    const showPWIncorrect = () => {
-        const pwError = document.getElementById("pwError");
-        pwError.classList.toggle("pwError");
-    }
+    // const showPWIncorrect = () => {
+    //     const pwError = document.getElementById("pwError");
+    //     pwError.classList.toggle("pwError");
+    // }
 
     const handleSubmit = e => {
         e.preventDefault();
         alert(`Your information has been updated!`)
         //*******//Needs to send information to database//********//
+        //*******//Once PUT endpoint is created we'll be able to change on the back-end//********//
 
         setupdatedUserProfile({
             ...updatedUserProfileObject,
-            phonenumber: UserProfileFormValues.phoneNumber,
-            password: UserProfileFormValues.newPassword,
-            password2: UserProfileFormValues.confirmNewPassword,
+            username: UserProfileFormValues.username,
+            // phonenumber: UserProfileFormValues.phoneNumber,
+            // password: UserProfileFormValues.newPassword,
+            // password2: UserProfileFormValues.confirmNewPassword,
         })
+
         console.log(updatedUserProfileObject);
         setUserProfileFormValues(initialUserProfileFormValues);
 
@@ -142,18 +163,32 @@ export default function UserProfile() {
     return (<div>
         <ProfileHeading>Your Profile</ProfileHeading>
         <CurrentProfile >
-            {console.log(updatedUserProfileObject.fullname, "this is the object state")}
             {/***** pull in current userInfo from database******/}
-            <p>Name: {updatedUserProfileObject.fullname} </p>
+            {/* <p>Name: {updatedUserProfileObject.fullname} </p> */}
             <p>Username: {updatedUserProfileObject.username}</p>
-            <p>Password: {updatedUserProfileObject.password}</p>
-            <p>Phone Number: {updatedUserProfileObject.phonenumber}</p>
+            {/* <p>Password: {updatedUserProfileObject.password}</p>
+            <p>Phone Number: {updatedUserProfileObject.phonenumber}</p> */}
         </CurrentProfile>
         <section>
             <ProfileHeading>Update Your Profile</ProfileHeading>
             <FormSection>
                 <form onSubmit={handleSubmit}>
+
                     <div>
+                        <label>
+                            <Input
+                                value={UserProfileFormValues.username}
+                                onChange={onChange}
+                                name='username'
+                                type='text'
+                                placeholder="New Username"
+                            />
+                        </label>
+                    </div>
+                    <ErrorDiv>{formErrors.username}</ErrorDiv>
+
+            
+                    {/* <div> *** COULD NOT USE ALL THESE INPUTS FOR CURRENT VERSION OF THIS APP.
 
                         <div>
                             <label>
@@ -166,8 +201,8 @@ export default function UserProfile() {
                                 />
                             </label>
                         </div>
-                        <ErrorDiv>{formErrors.phoneNumber}</ErrorDiv>
-                        <div>
+                        <ErrorDiv>{formErrors.phoneNumber}</ErrorDiv> */}
+                        {/* <div>
                             <label>
                                 <Input
                                     value={UserProfileFormValues.currentPassword}
@@ -180,7 +215,7 @@ export default function UserProfile() {
                         </div>
                         <ErrorDiv>{formErrors.currentPassword}</ErrorDiv>
                         {/* <ErrorDiv id="pwError" className="pwError">Password is not correct!</ErrorDiv> */}
-                        <div>
+                        {/* <div>
                             <label>
                                 <Input
                                     value={UserProfileFormValues.newPassword}
@@ -204,8 +239,8 @@ export default function UserProfile() {
                             </label>
 
                         </div>
-                        <ErrorDiv>{formErrors.confirmNewPassword}</ErrorDiv>
-                    </div>
+                        <ErrorDiv>{formErrors.confirmNewPassword}</ErrorDiv> */}
+                     {/* </div> */}
                     <Button type="submit" disabled={disabled}>Update</Button>
 
                 </form>
