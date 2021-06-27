@@ -74,10 +74,9 @@ const SignUp = props => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    axios.post('http://localhost:5000/api/auth/register', {
-      body:{
+    axios.post('https://backendanew.herokuapp.com/api/auth/register', {
         username: form.username,
-        password: form.password}
+        password: form.password,
     })
     .then( res => {
       setSuccess(!success)
