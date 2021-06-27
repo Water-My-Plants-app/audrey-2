@@ -61,6 +61,7 @@ const Login = props => {
         .then(res => {
           console.log(res);
           localStorage.setItem('token', res.data.token);
+          localStorage.setItem('userName', `${form.username}`);
           push('/');
           window.location.reload();
         })
@@ -68,7 +69,6 @@ const Login = props => {
           setError(err.response.data)
         })
         
-        localStorage.setItem('userName', `${form.username}`); 
         console.log("submitted", form);
       };
       
