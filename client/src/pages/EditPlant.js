@@ -1,48 +1,11 @@
 import React, { useState } from 'react';
-import styled from 'styled-components';
-import {
-    Input,
-    Button,
-    Heading,
-} from '../styles/StyledComponents'
-
-const EditContainer = styled.div`
- display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  width: 80%;
-  padding: .5rem 0;
-  margin: 1rem auto;
-  background-color: #C1FFA6;
-  color: #000;
-  border: 1px solid grey;
-  border-radius: 2rem;
-  -webkit-box-shadow:0 .5rem .5rem grey;
-  -moz-box-shadow:0 .5rem .5rem grey;
-  box-shadow:0 1rem 1rem grey;
-`;
-
-const FormSection = styled.div`
- display: flex;
-  flex-direction: column;
-  text-align: center;
-  width: 80%;
-  padding: 1rem 0;
-  margin: 1rem auto;
-  background-color: #C1FFA6;
-  color: #000;
-  border: 1px solid grey;
-  border-radius: 2rem;
-  -webkit-box-shadow:0 .5rem .5rem grey;
-  -moz-box-shadow:0 .5rem .5rem grey;
-  box-shadow:0 1rem 1rem grey;
-`;
-
+import { useHistory } from 'react-router-dom';
 
 const EditPlant = (props) => {
     const { plants } = props;
     const [edit, setEdit] = useState([...plants]);
+
+    const { push } = useHistory();
 
     const handleChange = (event) => {
         const name = event.target.name;
@@ -110,10 +73,9 @@ const EditPlant = (props) => {
                             />
                         </FormSection>)
                 }) : undefined}
-
-            <Button onClick={handleSave}>save</Button>
-        </EditContainer>
-
+            <button onClick={handleSave}>save</button>
+            <button onClick={()=> push("/addplant") }>add plant</button>
+        </>
     )
 }
 
