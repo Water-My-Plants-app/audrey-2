@@ -3,7 +3,8 @@ import styled from "styled-components";
 import * as yup from 'yup';
 import schema from '../validation/signUpFormSchema';
 import { connect } from 'react-redux';
-import { POST_REGISTER } from '../actions';
+import { postRegister } from '../actions';
+import {useHistory} from 'react-router-dom';
 
 import {
     Button,
@@ -27,10 +28,11 @@ const Label = styled.label`
 `;
 
 const SignUp = props => {
-    console.log(props);
+
     const [form, setForm] = useState(initialFormValues);
     const [error, setError] = useState('');
     const [disabled, setDisabled] = useState(true);
+    const history = useHistory();
 
     useEffect(() => {
         schema.isValid(form)
@@ -74,8 +76,8 @@ const SignUp = props => {
             username: form.username,
             password: form.password
         }
-        console.log(user)
-        props.postUser(user);
+        props.postRegister(user);
+        history.push('/login')
     }
 
     return (
@@ -146,7 +148,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-    postUser: () => dispatch({type: POST_REGISTER})
-});
+    postRegister: (user) => dispatch(postRegister(user)),
+})
 
 export default connect(mapStateToProps,mapDispatchToProps)(SignUp);

@@ -19,6 +19,7 @@ export const axiosWithAuth = () =>{
         baseURL:'https://backendanew.herokuapp.com',
         headers: {
             Authorization: token
-        }
+        },
+        validateStatus: () => true
     });
 };
