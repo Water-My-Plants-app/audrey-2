@@ -12,6 +12,7 @@ import PrivateRoute from "./components/PrivateRoute";
 import EditPlant from "./pages/EditPlant";
 import { connect } from 'react-redux';
 import { getPlants } from './actions';
+import LoadingPage from "./pages/LoadingPage";
 
 const Content = styled.div`
   margin-top: 150px;
@@ -35,7 +36,7 @@ function App(props) {
             <Content>
                 <Route exact path="/" component={Welcome}/>
                 <Route path="/signup" component={SignUp}/>
-                <Route path="/login" component={Login}/>
+                <Route path="/login" component={() => plants.isFetching === false ? <Login /> : <LoadingPage />}/>
                 <PrivateRoute path="/profile" component={UserProfile}/>
                 <PrivateRoute path="/addplant" component={AddPlant} exact />
                 <PrivateRoute path="/home" component={() => <Home plants={plants.data} />}/>

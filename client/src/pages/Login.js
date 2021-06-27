@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useHistory } from 'react-router';
 import axios from 'axios';
 import * as yup from 'yup';
 import schema from '../validation/loginFormSchema';
@@ -15,6 +16,8 @@ const Login = props => {
   const [form, setForm] = useState({username:'',password:''});
   const [error, setError] = useState('');
   const [disabled, setDisabled] = useState(true);
+
+  const { push } = useHistory();
 
   useEffect( () => {
     schema.isValid(form)
@@ -55,20 +58,24 @@ const Login = props => {
     const handleSubmit = (event) => {
         event.preventDefault();
         axios.post('https://backendanew.herokuapp.com/api/auth/login', form)
-            .then(res => {
-                console.log(res);
-                localStorage.setItem('token', res.data.token);
-                props.history.push('/');
-                window.location.reload();
-            })
-
+        .then(res => {
+          console.log(res);
+          localStorage.setItem('token', res.data.token);
+          push('/');
+          window.location.reload();
+        })
+        .catch(err => {
+          setError(err.response.data)
+        })
+        
         localStorage.setItem('userName', `${form.username}`); 
         console.log("submitted", form);
-    };
-
+      };
+      
   return (
     <>
       <Heading>Login page</Heading>
+      {error.wrong_credentials ? <Error>{error.wrong_credentials}</Error> : null}
       <FormDiv onSubmit={handleSubmit}>
           {error.username ? <Error>{error.username}</Error> : undefined}
         <Input type="text" name="username" placeholder="Username" value={form.username} onChange={handleChange} />
