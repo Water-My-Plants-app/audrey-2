@@ -149,15 +149,15 @@ export default function UserProfile() {
                                 placeholder="Water How Often?"
                             />
                         </label>
-                        <label>
-                            <Input
-                                value={addPlantFormValues.h2oFrequency}
-                                onChange={onChange}
-                                name='h2oFrequency'
-                                type='text'
-                                placeholder="Water How Often?"
-                            />
-                        </label>
+                        {/*<label>*/}
+                        {/*    <Input*/}
+                        {/*        value={addPlantFormValues.h2oFrequency}*/}
+                        {/*        onChange={onChange}*/}
+                        {/*        name='h2oFrequency'*/}
+                        {/*        type='text'*/}
+                        {/*        placeholder="Water How Often?"*/}
+                        {/*    />*/}
+                        {/*</label>*/}
                     </div>
                     <Button type="submit" disabled={disabled}>Update</Button>
 

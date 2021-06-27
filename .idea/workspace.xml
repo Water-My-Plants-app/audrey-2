@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="48e292b5-bf16-4a13-8ef9-46768db525ce" name="Default Changelist" comment="Welcome &gt; connected redux state">
+      <change afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/pages/AddPlant.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/pages/AddPlant.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/pages/EditPlant.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/pages/EditPlant.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/pages/Welcome.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/pages/Welcome.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/styles/StyledComponents.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/styles/StyledComponents.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/utilities/axiosCalls.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/utilities/axiosCalls.js" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="Login/loadingStatus" />
+      </map>
+    </option>
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
+    <property name="ASKED_SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="node.js.selected.package.tslint" value="(autodetect)" />
+    <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
+  </component>
+  <component name="TaskManager">
+    <task id="LOCAL-00001" summary="created a userReducer.js">
+      <created>1624681244306</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1624681244306</updated>
+    </task>
+    <task id="LOCAL-00002" summary="added userReducer.js to combined reducers">
+      <created>1624681352926</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1624681352926</updated>
+    </task>
+    <task id="LOCAL-00003" summary="added switch default to userRedcer">
+      <created>1624684041456</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1624684041456</updated>
+    </task>
+    <task id="LOCAL-00004" summary="userReducer untested but complete for now, user action types complete, actionCreators need work.">
+      <created>1624688191362</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1624688191362</updated>
+    </task>
+    <task id="LOCAL-00005" summary="connected dispatch and state to SignUp">
+      <created>1624755596559</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1624755596559</updated>
+    </task>
+    <task id="LOCAL-00006" summary="succesful call from sighn up pushes user to login page, signup using dispatch to make the submit call.">
+      <created>1624757836717</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1624757836717</updated>
+    </task>
+    <task id="LOCAL-00007" summary="Welcome &gt; connected redux state">
+      <created>1624814498308</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1624814498308</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
+    <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="origin/action_calls" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
+    <MESSAGE value="created a userReducer.js" />
+    <MESSAGE value="added userReducer.js to combined reducers" />
+    <MESSAGE value="added switch default to userRedcer" />
+    <MESSAGE value="userReducer untested but complete for now, user action types complete, actionCreators need work." />
+    <MESSAGE value="connected dispatch and state to SignUp" />
+    <MESSAGE value="succesful call from sighn up pushes user to login page, signup using dispatch to make the submit call." />
+    <MESSAGE value="Welcome &gt; connected redux state" />
+    <option name="LAST_COMMIT_MESSAGE" value="Welcome &gt; connected redux state" />
+  </component>
+</project>

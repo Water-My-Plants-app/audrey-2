@@ -1,0 +1,87 @@
+Index: client/src/utilities/axiosCalls.js
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>// import axios from 'axios';\r\n//\r\n// export const axiosWithAuth =() => {\r\n//     const token = localStorage.getItem('token');\r\n//\r\n//     return axios.create({\r\n//         headers: {\r\n//             Authorization: token,\r\n//         },\r\n//     });\r\n// };\r\n\r\nimport axios from 'axios';\r\n\r\nexport const axiosWithAuth = () =>{\r\n    const token = localStorage.getItem('token')\r\n    return axios.create({\r\n        // baseURL:'https://buildweekplants.herokuapp.com',\r\n        baseURL:'https://backendanew.herokuapp.com',\r\n        headers: {\r\n            Authorization: token\r\n        },\r\n        validateStatus: () => true\r\n    });\r\n};\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/client/src/utilities/axiosCalls.js b/client/src/utilities/axiosCalls.js
+--- a/client/src/utilities/axiosCalls.js	(revision 6273dfbb2780eedf3717df244c895fcd3d17f1e7)
++++ b/client/src/utilities/axiosCalls.js	(date 1624817654224)
+@@ -13,12 +13,13 @@
+ import axios from 'axios';
+ 
+ export const axiosWithAuth = () =>{
+-    const token = localStorage.getItem('token')
++    const token = localStorage.getItem('token');
++    JSON.parse(token)
+     return axios.create({
+         // baseURL:'https://buildweekplants.herokuapp.com',
+         baseURL:'https://backendanew.herokuapp.com',
+         headers: {
+-            Authorization: token
++            Authorization: JSON.stringify(token)
+         },
+         validateStatus: () => true
+     });
+Index: client/src/pages/Welcome.js
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>import React from \"react\";\r\nimport styled from \"styled-components\";\r\nimport image from \"../assets/sapling.png\";\r\nimport { Heading } from \"../styles/StyledComponents\";\r\nimport { connect } from 'react-redux';\r\n\r\nconst WelcomeDiv = styled.div`\r\n  margin: 0 auto;\r\n  text-align: center;\r\n`;\r\nconst Image = styled.img`\r\n  max-width: 90%;\r\n`;\r\n\r\nconst Welcome =(props)=> {\r\n  const token = localStorage.getItem('token');\r\n  const userName = {props.username};\r\n\r\n  return (\r\n    <WelcomeDiv>\r\n      {token ? (<Heading>{`Welcome ${userName}`}</Heading>) : (<Heading>Welcome</Heading>)}\r\n      <h2>Let's Grow Your Garden</h2>\r\n      <Image src={image} />\r\n    </WelcomeDiv>\r\n  );\r\n}\r\n\r\nconst mapStateToProps = state => ({\r\n    username: state.user.username,\r\n})\r\nexport default connect(mapStateToProps,dispatch)(Welcome)
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/client/src/pages/Welcome.js b/client/src/pages/Welcome.js
+--- a/client/src/pages/Welcome.js	(revision 6273dfbb2780eedf3717df244c895fcd3d17f1e7)
++++ b/client/src/pages/Welcome.js	(date 1624815400917)
+@@ -14,11 +14,11 @@
+ 
+ const Welcome =(props)=> {
+   const token = localStorage.getItem('token');
+-  const userName = {props.username};
++ console.log(props.state)
+ 
+   return (
+     <WelcomeDiv>
+-      {token ? (<Heading>{`Welcome ${userName}`}</Heading>) : (<Heading>Welcome</Heading>)}
++      {token ? (<Heading>{`Welcome `}</Heading>) : (<Heading>Welcome</Heading>)}
+       <h2>Let's Grow Your Garden</h2>
+       <Image src={image} />
+     </WelcomeDiv>
+@@ -26,6 +26,7 @@
+ }
+ 
+ const mapStateToProps = state => ({
+-    username: state.user.username,
++    state
+ })
+-export default connect(mapStateToProps,dispatch)(Welcome)
+\ No newline at end of file
++
++export default connect(mapStateToProps,)(Welcome)
+\ No newline at end of file
+Index: client/src/pages/Login.js
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>import React, { useState, useEffect } from 'react';\r\nimport axios from 'axios';\r\nimport * as yup from 'yup';\r\nimport schema from '../validation/loginFormSchema';\r\n\r\nimport {\r\n  Input,\r\n  Heading,\r\n  FormDiv,\r\n  Button,\r\n  Error\r\n} from '../styles/StyledComponents'\r\n\r\nconst Login = props => {\r\nconsole.log(props)\r\n  const [form, setForm] = useState({username:'',password:''});\r\n  const [error, setError] = useState('');\r\n  const [disabled, setDisabled] = useState(true);\r\n\r\n  useEffect( () => {\r\n    schema.isValid(form)\r\n    .then( valid => {\r\n      setDisabled(!valid)\r\n    })\r\n  },[form])\r\n\r\n  const updateForm = (name, value) => {\r\n    yup\r\n    .reach(schema, name)\r\n    .validate(value)\r\n    .then( res => {\r\n      setError({\r\n        ...error,\r\n        [name]: ''\r\n      })\r\n    })\r\n    .catch( err => {\r\n      setError({\r\n        ...error,\r\n        [name]: err.errors[0]\r\n      })\r\n    })\r\n\r\n    setForm({\r\n      ...form,\r\n      [name]: value\r\n    })\r\n  }\r\n\r\n  const handleChange = (event) => {\r\n    event.stopPropagation();\r\n    const { name, value } = event.target;\r\n    updateForm(name, value);\r\n  }\r\n\r\n    const handleSubmit = (event) => {\r\n        event.preventDefault();\r\n        axios.post('https://buildweekplants.herokuapp.com/login', form)\r\n            .then(res => {\r\n                console.log(res);\r\n                localStorage.setItem('token', res.data);\r\n                props.history.push('/');\r\n                window.location.reload();\r\n            })\r\n\r\n        console.log(\"submitted\", form)\r\n    }\r\n\r\n  return (\r\n    <>\r\n      <Heading>Login page</Heading>\r\n      <FormDiv onSubmit={handleSubmit}>\r\n          {error.username ? <Error>{error.username}</Error> : undefined}\r\n        <Input type=\"text\" name=\"username\" placeholder=\"Username\" value={form.username} onChange={handleChange} />\r\n\r\n          {error.password ? <Error>{error.password}</Error> : undefined}\r\n        <Input type=\"password\" name=\"password\" placeholder=\"Password\" value={form.password} onChange={handleChange} />\r\n\r\n        <Button disabled={disabled} type=\"submit\">Login</Button>\r\n      </FormDiv>\r\n    </>\r\n  );\r\n};\r\n\r\nexport default Login;\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/client/src/pages/Login.js b/client/src/pages/Login.js
+--- a/client/src/pages/Login.js	(revision 6273dfbb2780eedf3717df244c895fcd3d17f1e7)
++++ b/client/src/pages/Login.js	(date 1624817680310)
+@@ -55,10 +55,11 @@
+ 
+     const handleSubmit = (event) => {
+         event.preventDefault();
+-        axios.post('https://buildweekplants.herokuapp.com/login', form)
++        axios
++            .post('https://backendanew.herokuapp.com/api/auth/login', form)
+             .then(res => {
+-                console.log(res);
+-                localStorage.setItem('token', res.data);
++                console.log(res.data.token.token);
++                localStorage.setItem('token', res.data.token.token);
+                 props.history.push('/');
+                 window.location.reload();
+             })

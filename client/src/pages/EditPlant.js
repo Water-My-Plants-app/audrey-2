@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
+import { EditContainer, FormSection, Input, Heading} from '../styles/StyledComponents';
 
 const EditPlant = (props) => {
     const { plants } = props;
@@ -75,7 +76,7 @@ const EditPlant = (props) => {
                 }) : undefined}
             <button onClick={handleSave}>save</button>
             <button onClick={()=> push("/addplant") }>add plant</button>
-        </>
+        </EditContainer>
     )
 }
 

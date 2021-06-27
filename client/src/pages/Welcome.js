@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import image from "../assets/sapling.png";
 import { Heading } from "../styles/StyledComponents";
+import { connect } from 'react-redux';
 
 const WelcomeDiv = styled.div`
   margin: 0 auto;

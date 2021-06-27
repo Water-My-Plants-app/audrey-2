@@ -1,6 +1,22 @@
 // import { Form, Field } from "formik";
 import styled from "styled-components";
 
+export const EditContainer = styled.div`
+ display: flex;
+  flex-direction: column;
+  text-align: center;
+  width: 70%;
+  padding: 1rem 0;
+  margin: 1rem auto;
+  background-color: #C1FFA6;
+  color: #000;
+  border: 1px solid grey;
+  border-radius: 2rem;
+  -webkit-box-shadow:0 .5rem .5rem grey;
+  -moz-box-shadow:0 .5rem .5rem grey;
+  box-shadow:0 1rem 1rem grey;
+`;
+
 export const FormDiv = styled('form')`
   display: flex;
   flex-direction: column;
@@ -17,6 +33,13 @@ export const FormDiv = styled('form')`
 `;
 
 export const Heading = styled.h1`
+  font-size: 3rem;
+  font-weight: 300;
+  text-align: center;
+  padding-top: 4rem;
+`;
+
+export const Header = styled.h1`
   font-size: 3rem;
   font-weight: 300;
   text-align: center;
@@ -64,4 +87,20 @@ export const Error = styled.p`
   padding: 5px 10px;
   margin: -8px auto -1rem;
   z-index: 3;
+`;
+
+export const FormSection = styled.div`
+ display: flex;
+  flex-direction: column;
+  text-align: center;
+  width: 70%;
+  padding: 1rem 0;
+  margin: 1rem auto;
+  background-color: #C1FFA6;
+  color: #000;
+  border: 1px solid grey;
+  border-radius: 2rem;
+  -webkit-box-shadow:0 .5rem .5rem grey;
+  -moz-box-shadow:0 .5rem .5rem grey;
+  box-shadow:0 1rem 1rem grey;
 `;
