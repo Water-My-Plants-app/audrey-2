@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { axiosWithAuth } from '../utilities/axiosCalls';
 import { useHistory } from 'react-router-dom';
 import { EditContainer, FormSection, Input, Heading} from '../styles/StyledComponents';
 
@@ -26,6 +27,17 @@ const EditPlant = (props) => {
 
     const handleSave = (event) => {
         event.preventDefault();
+        const id = edit.map( item => item.id);
+        id.forEach(id => {
+            axiosWithAuth()
+            .put(`/api/plants/${id}`, edit[id -1])
+            .then(res => {
+                push("/home")
+                window.location.reload();
+            })
+            .catch(err => console.log(err))
+        })
+
         console.log("saved", edit)
     }
 
@@ -54,24 +66,15 @@ const EditPlant = (props) => {
                                 onChange={handleChange}
                                 placeholder="Species"
                             />
-                            <label htmlFor="h2oFrequency"></label>
+                            <label htmlFor="h2o_frequency"></label>
                             <Input
                                 id={plant.id}
                                 type="text-field"
-                                name="h2oFrequency"
-                                value={edit[i].h2oFrequency}
+                                name="h2o_frequency"
+                                value={edit[i].h2o_frequency}
                                 onChange={handleChange}
                                 placeholder="Schedule"
-                            />
-                            <label htmlFor="image"></label>
-                            <Input
-                                id={plant.id}
-                                type="text"
-                                name="image"
-                                value={edit[i].image}
-                                onChange={handleChange}
-                                placeholder="Image"
-                            />
+                            />                            
                         </FormSection>)
                 }) : undefined}
             <button onClick={handleSave}>save</button>

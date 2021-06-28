@@ -22,7 +22,7 @@ const initialUserProfileFormValues = {
 
 const initialFormValues = {
     // fullname: 'Jimbo Jimbo',
-    username: 'Jim',
+    username: '',
     // phonenumber: '4404175555',
     // password: 'slimjim',
     // password2: 'slimjim',
