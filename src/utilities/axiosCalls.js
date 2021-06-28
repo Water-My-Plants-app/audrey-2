@@ -18,7 +18,7 @@ export const axiosWithAuth = () =>{
         // baseURL:'https://buildweekplants.herokuapp.com',
         baseURL:'https://backendanew.herokuapp.com',
         headers: {
-            Authorization: JSON.stringify(token)
+            Authorization: token
         }
     });
 };
