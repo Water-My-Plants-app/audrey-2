@@ -38,7 +38,7 @@ const Home = ({ plants }) => {
                         <PlantCard
                             title={plant.nickname}
                             species={plant.species}
-                            schedule={plant.h2oFrequency}
+                            schedule={plant.h2o_frequency}
                             id={plant.id}
                             key={plant.id}
                         />

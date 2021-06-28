@@ -7,6 +7,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { axiosWithAuth } from '../utilities/axiosCalls';
+import { useHistory } from 'react-router-dom';
 import * as yup from 'yup';
 import styled from 'styled-components';
 import {
@@ -57,6 +58,8 @@ export default function UserProfile() {
     const [disabled, setDisabled] = useState(true)
     const [formErrors, setFormErrors] = useState(initialFormErrors) // object
 
+    const { push } = useHistory();
+
     // onchange -- set values
     const onChange = e => {
 
@@ -90,7 +93,8 @@ export default function UserProfile() {
             species: addPlantFormValues.species,
         })
         .then(res => {
-            console.log(res)
+            push("/home")
+            window.location.reload()
         })
         .catch(err => {
             console.log(err)
