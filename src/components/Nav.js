@@ -21,7 +21,6 @@ const NavBar = styled.nav`
 `;
 
 const Heading = styled(NavLink)`
-  -webkit-text-decoration: none;
   text-decoration: none;
   order: 2;
   font-size: 1.2rem;
@@ -48,7 +47,6 @@ const NavLinks = styled.div`
 
 const MainLink = styled(NavLink)`
   color: #fff;
-  -webkit-text-decoration: none;
   text-decoration: none;
   font-size: 1rem;
   font-weight: 700;
@@ -82,8 +80,6 @@ const ButtonLink = styled(NavLink)`
   padding: 5px;
   border-radius: 0.5rem;
   text-align: center;
-  -webkit-text-decoration: none;
-  text-decoration: none;
   text-transform: uppercase;
   border: none;
   background-color: #d4d4aa;
@@ -110,8 +106,6 @@ const Button = styled.button`
   padding: 5px;
   border-radius: 0.5rem;
   text-align: center;
-  -webkit-text-decoration: none;
-  text-decoration: none;
   text-transform: uppercase;
   border: none;
   background-color: #d4d4aa;
