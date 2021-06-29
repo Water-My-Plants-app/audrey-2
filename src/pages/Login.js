@@ -59,11 +59,12 @@ const Login = props => {
         event.preventDefault();
         axios.post('https://backendanew.herokuapp.com/api/auth/login', form)
         .then(res => {
+          console.log('login submit reply: ',res.data.token);
           console.log(res);
           localStorage.setItem('token', res.data.token);
           localStorage.setItem('userName', `${form.username}`);
           push('/');
-          window.location.reload();
+          // window.location.reload();
         })
         .catch(err => {
           setError(err.response.data)

@@ -93,7 +93,7 @@ export default function UserProfile() {
             species: addPlantFormValues.species,
         })
         .then(res => {
-            push("/home")
+            push("/")
             window.location.reload()
         })
         .catch(err => {
