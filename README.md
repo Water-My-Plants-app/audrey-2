@@ -1,7 +1,7 @@
 ![A lovely reminder](https://i.imgur.com/NWn8Dyc.jpeg)
 # Audrey-II is an app that will help those who love their plants, care for their plants.
 :wilted_flower:
-#vUser needs:
+## User needs:
 ### Registering a new account
     User must have a unique username, as well as password. 
     A unique ID should be auto-generated for each account.
