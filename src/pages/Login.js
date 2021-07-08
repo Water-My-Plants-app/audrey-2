@@ -64,7 +64,7 @@ const Login = props => {
           localStorage.setItem('token', res.data.token);
           localStorage.setItem('userName', `${form.username}`);
           push('/');
-          // window.location.reload();
+          window.location.reload();
         })
         .catch(err => {
           setError(err.response.data)
