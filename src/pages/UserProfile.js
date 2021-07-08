@@ -87,22 +87,21 @@ export default function UserProfile() {
     const [disabled, setDisabled] = useState(true)
     const [formErrors, setFormErrors] = useState(initialFormErrors) // object
 
-    useEffect(() => {
-        axiosWithAuth()
-        .get('/api/users')
-        .then(res => {
-            const userObj = res.data.filter( item => item.username === localStorage.getItem('userName'))
-            setupdatedUserProfile({
-                ...updatedUserProfileObject,
-                'username': userObj[0].username,
-                'id': userObj[0].id,
-            })
+ 
+    axiosWithAuth()
+    .get('/api/users')
+    .then(res => {
+        const userObj = res.data.filter( item => item.username === localStorage.getItem('userName'))
+        setupdatedUserProfile({
+            ...updatedUserProfileObject,
+            'username': userObj[0].username,
+            'id': userObj[0].id,
         })
-        .catch(err => {
-            console.log(err)
-        })
+    })
+    .catch(err => {
+        console.log(err)
+    })
 
-    },[])
     // onchange -- set values
     const onChange = e => {
 

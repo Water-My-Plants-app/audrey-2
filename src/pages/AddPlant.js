@@ -163,7 +163,7 @@ export default function UserProfile() {
                         {/*    />*/}
                         {/*</label>*/}
                     </div>
-                    <Button type="submit" disabled={disabled}>Update</Button>
+                    <Button type="submit" disabled={disabled}>Add Plant</Button>
 
                 </form>
             </FormSection>
