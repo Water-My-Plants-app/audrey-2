@@ -68,10 +68,11 @@ const Login = props => {
           localStorage.setItem('userName', `${form.username}`);
           push('/');
           window.location.reload()
-        },2050);
+        },1750);
       })
       .catch(err => {
-        props.errHandle(err.response.data)
+        props.fetchStatus(false);
+        props.errHandle(err.response.data);
       })
       
       console.log("submitted", form);
