@@ -59,6 +59,7 @@ const Login = props => {
         event.preventDefault();
         axios.post('https://backendanew.herokuapp.com/api/auth/login', form)
         .then(res => {
+          props.fetchPlants();
           console.log('login submit reply: ',res.data.token);
           console.log(res);
           localStorage.setItem('token', res.data.token);
