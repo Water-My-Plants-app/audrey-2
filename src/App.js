@@ -28,7 +28,7 @@ function App(props) {
     if (localStorage.getItem('token')) {
       getPlants();
     }
-  },[getPlants])
+  },[getPlants]);
 
     return (
         <div className="App">
@@ -36,11 +36,10 @@ function App(props) {
             <Content>
                 <Route exact path="/" component={Welcome}/>
                 <Route path="/signup" component={SignUp}/>
-                <Route path="/login" component={() => plants.isFetching === false ? <Login /> : <LoadingPage />}/>
+                <Route path="/login" component={() => plants.isFetching === false ? <Login fetchPlants={getPlants} /> : <LoadingPage />}/>
                 <PrivateRoute path="/profile" component={UserProfile}/>
                 <PrivateRoute path="/addplant" component={AddPlant} exact />
                 <PrivateRoute path="/home" component={() => <Home plants={plants.data} />}/>
-                {/*<PrivateRoute path="/plants/:id" component={EditPlant} />*/}
                 <PrivateRoute path="/plants" component={() => <EditPlant plants={plants.data} />} exact/>
 
             </Content>
