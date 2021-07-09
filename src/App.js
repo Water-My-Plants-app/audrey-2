@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import {Route} from "react-router-dom";
 import styled from "styled-components";
 import Nav from './components/Nav'
@@ -23,6 +23,8 @@ const Content = styled.div`
 
 function App(props) {
   const { plants, getPlants } = props;
+  const [fetchingStatus, setfetchingStatus] = useState(false)
+  const [err, setErr] = useState('');
 
   useEffect(() => {
     if (localStorage.getItem('token')) {
@@ -30,13 +32,18 @@ function App(props) {
     }
   },[getPlants]);
 
+  const handleError = (x) => {
+    setErr(x);
+    setfetchingStatus(false);
+  };
+
     return (
         <div className="App">
             <Nav/>
             <Content>
                 <Route exact path="/" component={Welcome}/>
                 <Route path="/signup" component={SignUp}/>
-                <Route path="/login" component={() => plants.isFetching === false ? <Login fetchPlants={getPlants} /> : <LoadingPage />}/>
+                <Route path="/login" component={() => fetchingStatus === false ? <Login appErr={err} errHandle={handleError} fetchStatus={setfetchingStatus} /> : <LoadingPage />}/>
                 <PrivateRoute path="/profile" component={UserProfile}/>
                 <PrivateRoute path="/addplant" component={AddPlant} exact />
                 <PrivateRoute path="/home" component={() => <Home plants={plants.data} />}/>
