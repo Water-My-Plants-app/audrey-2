@@ -131,7 +131,6 @@ export default function UserProfile() {
 
     const handleSubmit = e => {
         e.preventDefault();
-        alert(`Your information has been updated!`)
         //*******//Needs to send information to database//********//
         //*******//Once PUT endpoint is created we'll be able to change on the back-end//********//
 
