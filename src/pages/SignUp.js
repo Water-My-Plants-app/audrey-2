@@ -16,11 +16,11 @@ import {
 } from '../styles/StyledComponents';
 
 const initialFormValues = {
-  fullname: '',
+  // fullname: '',
   username: '',
-  phonenumber: '',
+  // phonenumber: '',
   password: '',
-  password2: '',
+  // password2: '',
   termsOfService: false
 }
 
@@ -94,25 +94,25 @@ const SignUp = props => {
     <>
       {success === false ? (<><Heading>Sign Up</Heading>
       <FormDiv onSubmit={handleSubmit}>
-          {error.fullname ? <Error>{error.fullname}</Error> : undefined}
+          {/* {error.fullname ? <Error>{error.fullname}</Error> : undefined}
 
-        <Input type="text" name="fullname" placeholder="Name" onChange={handleChange} value={form.fullname} />
+        <Input type="text" name="fullname" placeholder="Name" onChange={handleChange} value={form.fullname} /> */}
 
           {error.username ? <Error>{error.username}</Error> : undefined}
 
         <Input type="text" name="username" placeholder="Username" onChange={handleChange} value={form.username} />
 
-          {error.phonenumber ? <Error>{error.phonenumber}</Error> : undefined}
+          {/* {error.phonenumber ? <Error>{error.phonenumber}</Error> : undefined}
 
-        <Input type="text" name="phonenumber" placeholder="Phone number" onChange={handleChange} value={form.phonenumber} />
+        <Input type="text" name="phonenumber" placeholder="Phone number" onChange={handleChange} value={form.phonenumber} /> */}
 
           {error.password ? <Error>{error.password}</Error> : undefined}
         
         <Input type="password" name="password" placeholder="Password" onChange={handleChange} value={form.password} />
 
-          {error.password2 ? <Error>{error.password2}</Error> : undefined}
+          {/* {error.password2 ? <Error>{error.password2}</Error> : undefined}
 
-        <Input type="password" name="password2" placeholder="Confirm password" onChange={handleChange} value={form.password2} />
+        <Input type="password" name="password2" placeholder="Confirm password" onChange={handleChange} value={form.password2} /> */}
 
           {error.termsOfService ? <Error>{error.termsOfService}</Error> : undefined}
 
