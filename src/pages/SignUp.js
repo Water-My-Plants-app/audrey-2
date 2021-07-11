@@ -116,7 +116,7 @@ const SignUp = props => {
 
           {error.termsOfService ? <Error>{error.termsOfService}</Error> : undefined}
 
-        <Label>
+        <Label style={{"display":"flex","flexFlow":"column"}}>
           <Input
             type="checkbox"
             name="termsOfService"
