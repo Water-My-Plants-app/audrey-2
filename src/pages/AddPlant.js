@@ -84,7 +84,6 @@ export default function UserProfile() {
 
     const handleSubmit = e => {
         e.preventDefault();
-        alert(`You have added a new Plant!`)
         //*******//Needs to send information to database//********//
         axiosWithAuth()
         .post('/api/plants', {
