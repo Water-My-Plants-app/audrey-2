@@ -55,28 +55,33 @@ const Login = props => {
     updateForm(name, value);
   }
 
-    const handleSubmit = (event) => {
-        event.preventDefault();
-        axios.post('https://backendanew.herokuapp.com/api/auth/login', form)
-        .then(res => {
+  const handleSubmit = (event) => {
+      event.preventDefault();
+      props.fetchStatus(true);
+      axios.post('https://backendanew.herokuapp.com/api/auth/login', form)
+      .then(res => {
+        setTimeout(() => {
+          props.fetchStatus(false);
           console.log('login submit reply: ',res.data.token);
           console.log(res);
           localStorage.setItem('token', res.data.token);
           localStorage.setItem('userName', `${form.username}`);
           push('/');
-          // window.location.reload();
-        })
-        .catch(err => {
-          setError(err.response.data)
-        })
-        
-        console.log("submitted", form);
-      };
+          window.location.reload()
+        },1750);
+      })
+      .catch(err => {
+        props.fetchStatus(false);
+        props.errHandle(err.response.data);
+      })
+      
+      console.log("submitted", form);
+    };
       
   return (
     <>
       <Heading>Login page</Heading>
-      {error.wrong_credentials ? <Error>{error.wrong_credentials}</Error> : null}
+      {props.appErr.wrong_credentials ? <Error>{props.appErr.wrong_credentials}</Error> : null}
       <FormDiv onSubmit={handleSubmit}>
           {error.username ? <Error>{error.username}</Error> : undefined}
         <Input type="text" name="username" placeholder="Username" value={form.username} onChange={handleChange} />

@@ -84,7 +84,6 @@ export default function UserProfile() {
 
     const handleSubmit = e => {
         e.preventDefault();
-        alert(`You have added a new Plant!`)
         //*******//Needs to send information to database//********//
         axiosWithAuth()
         .post('/api/plants', {
@@ -93,7 +92,7 @@ export default function UserProfile() {
             species: addPlantFormValues.species,
         })
         .then(res => {
-            push("/")
+            push("/home")
             window.location.reload()
         })
         .catch(err => {
@@ -163,7 +162,7 @@ export default function UserProfile() {
                         {/*    />*/}
                         {/*</label>*/}
                     </div>
-                    <Button type="submit" disabled={disabled}>Update</Button>
+                    <Button type="submit" disabled={disabled}>Add Plant</Button>
 
                 </form>
             </FormSection>
